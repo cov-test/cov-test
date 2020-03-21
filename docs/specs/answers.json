@@ -1,0 +1,67 @@
+[
+  {
+    "questionId": "CONTACT_TO_INFECTED_PERSON",
+    "answers": {
+      "contactInfected": "{NO|MAYBE|YES}",
+      "daysSinceContact": 0,
+      "sameHousehold": true
+    }
+  },
+  {
+    "questionId": "SYMPTOMS",
+    "answers": {
+      "fever": true,
+      "coughing": true,
+      "shivers": true,
+      "permanentTiredness": true,
+      "shortnessOfBreath": true,
+      "soreThroat": true,
+      "headache": true,
+      "rheumaticPains": true,
+      "diarrhea": true,
+      "nausea": true
+    }
+  },
+  {
+    "questionId": "FEVER",
+    "answers": {
+      "maximumTemperatureInDegrees": 38.5,
+      "daysSinceMaximumTemperature": 5
+    }
+  },
+  {
+    "questionId": "COUGHING",
+    "answers": {
+      "audio": "<base64 encoded audio>",
+      "type": "{DRY|CONGESTED|UNKNOWN}",
+      "phlegm": true,
+      "bloodInCough": true
+    }
+  },
+  {
+    "questionId": "TRAVEL",
+    "answers": {
+      "hasTravelled": "{NO|WITHIN_GERMANY|ABROAD}",
+      "abroadTravelCountryCode": "<ISO 3166-1 alpha-2 country code>"
+    }
+  },
+  {
+    "questionId": "RISK_GROUP",
+    "answers": {
+      "overFiftyYearsOld": true,
+      "overSixtyYearsOld": true,
+      "overSeventyYearsOld": true,
+      "overEightyYearsOld": true,
+      "smoker": true,
+      "pregnant": true,
+      "chronicLungDisease": true,
+      "consumptionOfImmunoSuppressantDrugs": true
+    }
+  },
+  {
+    "questionId": "WORKPLACE",
+    "answers": {
+      "workplace": "{EDUCATION_SECTOR, MEDICAL_SECTOR, FREQUENT_CONTACT_WITH_PEOPLE, OTHER}"
+    }
+  }
+]
