@@ -1,22 +1,22 @@
 import { hot } from 'react-hot-loader';
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import { styled } from '@material-ui/core/styles';
 import { Router } from '@reach/router';
-
-import { Header } from './components';
-import { Home } from './views';
+import { Home, Questionnary } from './views';
 import './App.css';
 
+const AppContainer = styled(Container)({
+  padding: '0',
+});
 const App = () => (
   <>
-    <CssBaseline />
-    <Container maxWidth="sm" className="app">
-      <Header />
+    <AppContainer maxWidth={false} className="app">
       <Router primary={false}>
         <Home path="/" default />
+        <Questionnary path="/start" />
       </Router>
-    </Container>
+    </AppContainer>
   </>
 );
 

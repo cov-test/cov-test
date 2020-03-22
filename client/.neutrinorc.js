@@ -1,18 +1,24 @@
-const airbnb = require("@neutrinojs/airbnb");
-const react = require("@neutrinojs/react");
-const jest = require("@neutrinojs/jest");
-
+const airbnb = require('@neutrinojs/airbnb');
+const react = require('@neutrinojs/react');
+const jest = require('@neutrinojs/jest');
+import 'typeface-work-sans';
 module.exports = {
   options: {
-    root: __dirname
+    root: __dirname,
   },
   use: [
     airbnb(),
     react({
       html: {
-        title: "COVTest"
-      }
+        title: 'COVTest',
+        links: [
+          {
+            href: 'https://fonts.googleapis.com/css?family=Lato',
+            rel: 'stylesheet',
+          },
+        ],
+      },
     }),
-    jest()
-  ]
+    jest(),
+  ],
 };

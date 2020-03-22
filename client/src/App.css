@@ -52,3 +52,12 @@
 .header {
   margin-bottom: 10px;
 }
+
+.questionnary {
+  background-color: #3f2c7a;
+  height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+}

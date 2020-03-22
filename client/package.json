@@ -21,7 +21,8 @@
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "typeface-work-sans": "^0.0.72"
   },
   "devDependencies": {
     "@neutrinojs/airbnb": "^9.1.0",
