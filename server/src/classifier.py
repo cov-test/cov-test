@@ -1,3 +1,4 @@
+import copy
 import collections
 import numpy as np
 
@@ -15,9 +16,8 @@ HIGH_RISK_COUNTRIES = set([
     'CN', # CHINA
 ])
 
-UNKNOWN_COEFFICIENT = 0
-
-prob_to_odds = lambda p: p / (1 - p)
+prob_to_odds = lambda p: 1 + p / (1 - p)
+prob_to_log_odds = lambda p: np.log(prob_to_odds(p))
 
 # The keys of this dict are also called 'factors' and the values 'coefficients'.
 # The coefficients are the logs of the odds ratio for a factor:
@@ -25,44 +25,44 @@ prob_to_odds = lambda p: p / (1 - p)
 # for a woman, the coefficient for the factor of being male is log(3)
 coefficients = collections.OrderedDict({
     # data from WHO
-    # TODO: convert the probabilities from WHO to odds ratios
-    "FEVER__maximumTemperatureInDegrees":   prob_to_odds(0.879),  # Fieber über 38 Grad
-    "FEVER__daysSinceMaximumTemperature":   prob_to_odds(0.0),    # ignored for now
-    "COUGHING__type":                       prob_to_odds(0.677),  # trockener Husten
-    "COUGHING__phlegm":                     prob_to_odds(0.334),  # Auswurf
-    "COUGHING__bloodInCough":               prob_to_odds(0.009),  # Blut beim Abhusten
+    "FEVER__maximumTemperatureInDegrees":   prob_to_log_odds(0.879),  # Fieber über 38 Grad
+    "FEVER__daysSinceMaximumTemperature":   prob_to_log_odds(0.0),    # ignored for now
+    "COUGHING__type":                       prob_to_log_odds(0.677),  # trockener Husten
+    "COUGHING__phlegm":                     prob_to_log_odds(0.334),  # Auswurf
+    "COUGHING__bloodInCough":               prob_to_log_odds(0.009),  # Blut beim Abhusten
+
+    "SYMPTOMS__shivers":                    prob_to_log_odds(0.114),  # Schüttelfrost
+    "SYMPTOMS__permanentTiredness":         prob_to_log_odds(0.381),  # Müdigkeit
+    "SYMPTOMS__shortnessOfBreath":          prob_to_log_odds(0.186),  # Kurzatmigkeit
+
+    "SYMPTOMS__soreThroat":                 prob_to_log_odds(0.139),  # Halsschmerzen
+    "SYMPTOMS__headache":                   prob_to_log_odds(0.136),  # Kopfschmerzen
+    "SYMPTOMS__rheumaticPains":             prob_to_log_odds(0.148),  # Gliederschmerzen
+
+    "SYMPTOMS__diarrhea":                   prob_to_log_odds(0.037),  # Durchfall
+    "SYMPTOMS__nausea":                     prob_to_log_odds(0.050),  # Übelkeit/Erbrechen
+
+
+    # these values are just assumptions and are not supported by data:
+    'TRAVEL__hasTravelled':                 np.log(1.2), # 1 = in Germany, 2 = abroad, 3: in high risk country
 
     "SYMPTOMS__fever_above_38_and_dry_cough":   np.log(1.5),      # combined risk for fever and dry_cough togehter
 
-
-    "SYMPTOMS__shivers":                    prob_to_odds(0.114),  # Schüttelfrost
-    "SYMPTOMS__permanentTiredness":         prob_to_odds(0.381),  # Müdigkeit
-    "SYMPTOMS__shortnessOfBreath":          prob_to_odds(0.186),  # Kurzatmigkeit
-
-    "SYMPTOMS__soreThroat":                 prob_to_odds(0.139),  # Halsschmerzen
-    "SYMPTOMS__headache":                   prob_to_odds(0.136),  # Kopfschmerzen
-    "SYMPTOMS__rheumaticPains":             prob_to_odds(0.148),  # Gliederschmerzen
-
-    "SYMPTOMS__diarrhea":                   prob_to_odds(0.037),  # Durchfall
-    "SYMPTOMS__nausea":                     prob_to_odds(0.050),  # Übelkeit/Erbrechen
-
-    # imaginary data
-    'TRAVEL__hasTravelled':                 np.log(1.2), # 1 = in Germany, 2 = abroad, 3: in high risk country
     
     'CONTACT_TO_INFECTED_PERSON__contactInfected':  np.log(3),
-    'CONTACT_TO_INFECTED_PERSON__daysSinceContact': UNKNOWN_COEFFICIENT,
+    'CONTACT_TO_INFECTED_PERSON__daysSinceContact': 0.0,
     'CONTACT_TO_INFECTED_PERSON__sameHousehold':    np.log(100),
     
     "RISK_GROUP__overFiftyYearsOld":               np.log(1.1),
     "RISK_GROUP__overSixtyYearsOld":               np.log(1.1),
-    "RISK_GROUP__overSeventyYearsOld":             np.log(1.2),
-    "RISK_GROUP__overEightyYearsOld":              np.log(1.2),
+    "RISK_GROUP__overSeventyYearsOld":             np.log(1.3),
+    "RISK_GROUP__overEightyYearsOld":              np.log(1.4),
     "RISK_GROUP__smoker":                          np.log(1.2),
     "RISK_GROUP__pregnant":                        np.log(1.3),
     "RISK_GROUP__chronicLungDisease":              np.log(1.3),
     "RISK_GROUP__consumptionOfImmunoSuppressantDrugs": np.log(1.3),
     
-    'WORKPLACE__workplace':                         np.log(1.5), # 1: medical sector
+    'WORKPLACE__workplace':                         np.log(1.), # 1: medical sector
 })
 
 SYMPTOM_FACTORS = [factor for factor in coefficients
@@ -88,6 +88,7 @@ def classify(answers):
     a coefficient value of 0.0 indicates no corona-indication
     and 1.0 indicates high indication for corona.
     """
+    debug = True
     answers = flatten_answers(answers)
     
     factor_list = list(sorted(coefficients.keys()))
@@ -138,6 +139,16 @@ def classify(answers):
     
 
     # == SYMPTOMS ==
+    number_of_symptoms = sum(answers[key] for key in SYMPTOM_FACTORS)
+
+    # If the person is only permanently tired and has no other symptoms,
+    # we do not classify them as corona positive
+    this_factor = 'SYMPTOMS__permanentTiredness'
+    if number_of_symptoms == 1 and answers[this_factor]:
+        i = factor_list.index(this_factor)
+        x[i] = 0
+       
+    
     # these factors will be dealt with in detail
     check.append('SYMPTOMS__fever')
     check.append('SYMPTOMS__coughing')
@@ -145,24 +156,25 @@ def classify(answers):
 
     # == FEVER ==
     this_factor = 'FEVER__maximumTemperatureInDegrees'
-    if answers['SYMPTOMS__fever']:
+    has_fever = False
+    if answers['SYMPTOMS__fever'] and answers['FEVER__daysSinceMaximumTemperature'] <= 4:
         i = factor_list.index(this_factor)
         x[i] = (answers[this_factor] >= 38.0)
+        has_fever = True
     check.append(this_factor)
-
-    # TODO: this factors are not considered for now
     check.append('FEVER__daysSinceMaximumTemperature')
     
     
     # == COUGHING ==
     this_factor = 'COUGHING__type'
+    has_dry_cough = False
     if answers['SYMPTOMS__coughing']:
         x += map_answer(answers, factor_list, this_factor, {'DRY': 1, 'CONGESTED': 0.25, 'UNKNOWN': 0.25})
+        if answers[this_factor] == 'DRY':
+            has_dry_cough = True
     check.append(this_factor)
 
-    # handle the combination of fever and dry cough with an exra risk
-    has_fever = (answers['SYMPTOMS__fever'] and answers['FEVER__maximumTemperatureInDegrees'] >= 38.0)
-    has_dry_cough = (answers['SYMPTOMS__coughing'] and answers['COUGHING__type'] == 'DRY')
+    # handle the combination of fever and dry cough with an extra risk
     combined_factor = 'SYMPTOMS__fever_above_38_and_dry_cough'
     if has_fever and has_dry_cough:
         i = factor_list.index(combined_factor)
@@ -199,11 +211,12 @@ def classify(answers):
     coeffs = np.array([coefficients[k] for k in factor_list])
     c = x.dot(coeffs)
     prob = np.exp(c) / (1 + np.exp(c))
-    test_result = prob > 0.75
-    
-    for i, this_factor in enumerate(factor_list):
-        if x[i] > 0:
-            print(this_factor, x[i], coeffs[i], x[i] * coeffs[i])
+    test_result = prob > 0.6
+
+    if debug:
+        for i, this_factor in enumerate(factor_list):
+            if x[i] > 0:
+                print(this_factor, x[i], coeffs[i], x[i] * coeffs[i])
     
     return (test_result, prob)
 
@@ -254,35 +267,126 @@ def test_classify():
             'workplace': 'OTHER',
         },
     }
+
+    answers = copy.deepcopy(answers_baseline)
+    res = classify(answers)
+    assert res[0] == False
     
-    answers = answers_baseline.copy()
+    answers = copy.deepcopy(answers_baseline)
     answers['CONTACT_TO_INFECTED_PERSON']['contactInfected'] = 'YES'
-    assert classify(answers)[0] == True
+    res = classify(answers)
+    print(res)
+    assert res[0] == True
 
 
-    answers = answers_baseline.copy()
+    answers = copy.deepcopy(answers_baseline)
+    assert answers['CONTACT_TO_INFECTED_PERSON']['contactInfected'] == 'NO'
     answers['CONTACT_TO_INFECTED_PERSON']['contactInfected'] = 'MAYBE'
-    assert classify(answers)[0] == True
+    res = classify(answers)
+    assert res[0] == True
 
-    answers = answers_baseline.copy()
+    answers = copy.deepcopy(answers_baseline)
     answers['CONTACT_TO_INFECTED_PERSON']['contactInfected'] = 'MAYBE'
     answers['CONTACT_TO_INFECTED_PERSON']['daysSinceContact'] = 20
-    assert classify(answers)[0] == False
+    res = classify(answers)
+    assert res[0] == False
 
-    answers = answers_baseline.copy()
+    answers = copy.deepcopy(answers_baseline)
     answers['SYMPTOMS']['fever'] = True
     answers['FEVER']['maximumTemperatureInDegrees'] = 40
-    assert classify(answers)[0] == True
+    res = classify(answers)
+    assert res[0] == True
 
-    answers = answers_baseline.copy()
+    answers = copy.deepcopy(answers_baseline)
     answers['SYMPTOMS']['coughing'] = True
     answers['COUGHING']['type'] = 'DRY'
-    assert classify(answers)[0] == True
+    res = classify(answers)
+    print(res)
+    assert res[0] == True
 
-    answers = answers_baseline.copy()
+    answers = copy.deepcopy(answers_baseline)
     answers['SYMPTOMS']['fever'] = True
-    answers['SYMPTOMS']['coughing'] = True
     answers['FEVER']['maximumTemperatureInDegrees'] = 40
+    answers['SYMPTOMS']['coughing'] = True
     answers['COUGHING']['type'] = 'DRY'
-    assert classify(answers)[0] == True
+    res = classify(answers)
+    assert res[0] == True
+
+    answers = copy.deepcopy(answers_baseline)
+    answers['WORKPLACE']['workplace'] = 'MEDICAL_SECTOR'
+    res = classify(answers)
+    print(res)
+    assert res[0] == False
+
+    answers = copy.deepcopy(answers_baseline)
+    answers['WORKPLACE']['workplace'] = 'MEDICAL_SECTOR'
+    answers['SYMPTOMS']['fever'] = True
+    answers['FEVER']['maximumTemperatureInDegrees'] = 40
+    res = classify(answers)
+    print(res)
+    assert res[0] == True
+
+    answers = copy.deepcopy(answers_baseline)
+    answers['WORKPLACE']['workplace'] = 'MEDICAL_SECTOR'
+    answers['SYMPTOMS']['coughing'] = True
+    answers['COUGHING']['type'] = 'DRY'
+    res = classify(answers)
+    print(res)
+    assert res[0] == True
+
+    answers = copy.deepcopy(answers_baseline)
+    answers['WORKPLACE']['workplace'] = 'EDUCATION_SECTOR'
+    answers['SYMPTOMS']['fever'] = True
+    answers['FEVER']['maximumTemperatureInDegrees'] = 40
+    res = classify(answers)
+    print(res)
+    assert res[0] == True
+
+    answers = copy.deepcopy(answers_baseline)
+    answers['SYMPTOMS']['headache'] = True
+    answers['SYMPTOMS']['rheumaticPains'] = True
+    res = classify(answers)
+    print(res)
+    assert res[0] == False
+
+    answers = copy.deepcopy(answers_baseline)
+    answers['SYMPTOMS']['headache'] = True
+    answers['SYMPTOMS']['rheumaticPains'] = True
+    answers['SYMPTOMS']['shivers'] = True
+    res = classify(answers)
+    print(res)
+    assert res[0] == True
+
+    answers = copy.deepcopy(answers_baseline)
+    answers['SYMPTOMS']['permanentTiredness'] = True
+    res = classify(answers)
+    print(res)
+    assert res[0] == False
+
+    answers = copy.deepcopy(answers_baseline)
+    answers['RISK_GROUP']['smoker'] = True
+    res = classify(answers)
+    print(res)
+    assert res[0] == False
+
+    answers = copy.deepcopy(answers_baseline)
+    answers['RISK_GROUP']['smoker'] = True
+    answers['SYMPTOMS']['permanentTiredness'] = True
+    res = classify(answers)
+    print(res)
+    assert res[0] == False
+
+    answers = copy.deepcopy(answers_baseline)
+    answers['RISK_GROUP']['pregnant'] = True
+    answers['SYMPTOMS']['permanentTiredness'] = True
+    res = classify(answers)
+    print(res)
+    assert res[0] == False
+
+    answers = copy.deepcopy(answers_baseline)
+    answers['RISK_GROUP']['overEightyYearsOld'] = True
+    answers['SYMPTOMS']['shivers'] = True
+    res = classify(answers)
+    print(res)
+    assert res[0] == True
 
