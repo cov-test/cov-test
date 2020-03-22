@@ -238,6 +238,12 @@ def classify(answers):
             if x[i] > 0:
                 print(this_factor, x[i], coeffs[i], x[i] * coeffs[i])
     
+    test_result = bool(test_result)
+    prob = float(prob)
+
+    assert type(test_result) == bool
+    assert type(prob) == float
+
     return (test_result, prob)
 
 
