@@ -6,7 +6,7 @@ import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 
-import { Header } from './../../components';
+import { Header } from '../../components';
 
 const HomeButton = styled(ButtonBase)({
   background: '#3f2c7a',
