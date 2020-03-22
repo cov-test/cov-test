@@ -1,12 +1,23 @@
 import { hot } from 'react-hot-loader';
 import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+import { Router } from '@reach/router';
+
+import { Header } from './components';
+import { Home } from './views';
 import './App.css';
 
-const message = 'Welcome to client';
 const App = () => (
-  <div className="App">
-    <h1>{message}</h1>
-  </div>
+  <>
+    <CssBaseline />
+    <Container maxWidth="sm" className="app">
+      <Header />
+      <Router primary={false}>
+        <Home path="/" default />
+      </Router>
+    </Container>
+  </>
 );
 
 export default hot(module)(App);

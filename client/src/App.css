@@ -1,3 +1,54 @@
-.App {
-  padding: 20px;
+.app {
+  background-color: #f4f2f7;
+  width: 90vw;
+  height: 100vh;
+}
+
+.header {
+  border-radius: 0 0 30px 30px;
+  background-color: #3f2c7a;
+}
+.header p {
+  font-family: Lato;
+  font-size: 24px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #efedf2;
+  margin: 0;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.homeTest {
+  background-color: #3f2c7a;
+  color: #efedf2;
+  height: 100vh;
+}
+
+.homeIcon {
+  color: #efedf2;
+  width: 6rem;
+  height: 6rem;
+}
+
+.homeIcon svg {
+  color: #efedf2;
+  width: 6rem;
+  height: 6rem;
+}
+
+.home h3 {
+  color: #efedf2;
+}
+
+.header {
+  margin-bottom: 10px;
 }
