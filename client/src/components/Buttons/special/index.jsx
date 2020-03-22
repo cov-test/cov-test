@@ -14,12 +14,23 @@ const StyledButton = styled(Button)({
 });
 
 const SpecialButton = (props) => {
-  const { selected } = props;
-  return <>{selected ? <StyledButton color="primary" /> : <StyledButton variant="outlined" color="primary" />}</>;
+  const { selected, title } = props;
+  return (
+    <>
+      {selected ? (
+        <StyledButton color="primary">{title}</StyledButton>
+      ) : (
+        <StyledButton variant="outlined" color="primary">
+          {title}
+        </StyledButton>
+      )}
+    </>
+  );
 };
 
 SpecialButton.propTypes = {
   selected: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default hot(module)(SpecialButton);

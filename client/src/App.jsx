@@ -3,7 +3,10 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import { styled } from '@material-ui/core/styles';
 import { Router } from '@reach/router';
-import { Home, Questionnary, Question } from './views';
+import
+{
+  Home, Questionnary, Question, Foobar,
+} from './views';
 import './App.css';
 
 const AppContainer = styled(Container)({
@@ -16,6 +19,7 @@ const App = () => (
         <Home path="/" default />
         <Questionnary path="/start" />
         <Question path="/question" />
+        <Foobar path="/foobar" />
       </Router>
     </AppContainer>
   </>
