@@ -1,4 +1,3 @@
 language: node_js
-
-script:
-  - cd client && yarn test
+node_js:
+  - lts/*
