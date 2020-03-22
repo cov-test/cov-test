@@ -7,7 +7,7 @@ import classifier
 
 app = Flask(__name__)
 
-@app.route('/store_result')
+@app.route('/store_result', methods=['POST'])
 def store_result():
     data = request.get_json()
     test_data = answersparser.parse(data)
