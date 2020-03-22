@@ -16,17 +16,13 @@ const StyledButton = styled(Button)({
 export const SpecialButton = props => {
     const primary = '#3f2c7a';
     return (
-        <div>
+        <>
             { props.selected ? (
-                <React.Fragment>
-                    <StyledButton color="primary" />
-                </React.Fragment>
+                <StyledButton color="primary" />
             ) : (
-                <React.Fragment>
-                    <StyledButton variant="outlined" color="primary" />
-                </React.Fragment>
+                <StyledButton variant="outlined" color="primary" />
             ) }
-        </div>
+        </>
     )
 }
 
