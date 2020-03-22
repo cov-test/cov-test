@@ -1,7 +1,7 @@
 const airbnb = require('@neutrinojs/airbnb');
 const react = require('@neutrinojs/react');
 const jest = require('@neutrinojs/jest');
-import 'typeface-work-sans';
+require('typeface-work-sans');
 module.exports = {
   options: {
     root: __dirname,
