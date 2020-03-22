@@ -1,0 +1,3 @@
+*       @cov-test/backend @cov-test/frontend
+/client @cov-test/frontend
+/server @cov-test/backend

@@ -1,0 +1,50 @@
+{
+  "userId": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+  "answers": {
+    "CONTACT_TO_INFECTED_PERSON": {
+      "contactInfected": "YES",
+      "daysSinceContact": 3,
+      "sameHousehold": false
+    },
+    "SYMPTOMS": {
+      "fever": true,
+      "coughing": true,
+      "shivers": true,
+      "permanentTiredness": true,
+      "shortnessOfBreath": true,
+      "soreThroat": false,
+      "headache": true,
+      "rheumaticPains": true,
+      "diarrhea": false,
+      "nausea": true
+    },
+    "FEVER": {
+      "maximumTemperatureInDegrees": 38.5,
+      "daysSinceMaximumTemperature": 5
+    },
+    "COUGHING": {
+      "audio": "dGVzdA==\n",
+      "audioClassificationResult": "DRY",
+      "type": "PRODUCTIVE",
+      "phlegm": true,
+      "bloodInCough": true
+    },
+    "TRAVEL": {
+      "hasTravelled": "ABROAD",
+      "abroadTravelCountryCode": "US"
+    },
+    "RISK_GROUP": {
+      "overFiftyYearsOld": true,
+      "overSixtyYearsOld": true,
+      "overSeventyYearsOld": true,
+      "overEightyYearsOld": true,
+      "smoker": true,
+      "pregnant": true,
+      "chronicLungDisease": true,
+      "consumptionOfImmunoSuppressantDrugs": true
+    },
+    "WORKPLACE": {
+      "workplace": "EDUCATION_SECTOR"
+    }
+  }
+}
