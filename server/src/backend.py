@@ -15,6 +15,7 @@ def store_result():
         return jsonify({'success': False,
                         'errorMessage': 'No JSON value provided or Content-Type of request not set to "application/json"'})
     test_data = answersparser.parse(data)
+
     doc_ref = db.collection("answers").document(test_data.userId)
     doc_ref.set(test_data)
     result = classifier.classify(test_data)

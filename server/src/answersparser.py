@@ -4,8 +4,8 @@ from covtesttypes import *
 
 
 def parse(data):
-    userId = data.get("userId")
-    answers = data.get("answers")
+    userId = data["userId"]
+    answers = data["answers"]
     result = Answers(
         userId=userId,
         contactToInfectedPerson=parse_contact_to_infected_person(answers),
@@ -41,44 +41,28 @@ def parse_has_travelled(v):
 
 
 def parse_int(v):
-    try:
-        return int(v)
-    except ValueError:
-        return 0
-
-
-def parse_bool(v):
-    try:
-        return bool(v)
-    except ValueError:
-        return False
+    return int(v)
 
 
 def parse_float(v):
-    try:
-        return float(v)
-    except ValueError:
-        return float('NaN')
+    return float(v)
 
 
 def parse_base64(v):
-    try:
-        return base64.b64decode(v)
-    except Exception:
-        return b''
+    return base64.b64decode(v)
 
 
 def parse_contact_to_infected_person(data) -> ContactToInfectedPerson:
-    data = data.get('CONTACT_TO_INFECTED_PERSON', {})
+    data = data['CONTACT_TO_INFECTED_PERSON']
     return ContactToInfectedPerson(
-        contactInfected=parse_infected(data.get('contactInfected', 'NO')),
-        daysSinceContact=parse_int(data.get('daysSinceContact', '0')),
-        sameHousehold=parse_bool(data.get('sameHousehold', 'true'))
+        contactInfected=parse_infected(data['contactInfected']),
+        daysSinceContact=parse_int(data['daysSinceContact']),
+        sameHousehold=data['sameHousehold']
     )
 
 
 def parse_symptoms(data) -> Symptoms:
-    data = data.get('SYMPTOMS', {})
+    data = data['SYMPTOMS']
     symptoms = [
         'fever',
         'coughing',
@@ -92,40 +76,40 @@ def parse_symptoms(data) -> Symptoms:
         'nausea',
     ]
     return Symptoms(**{
-        key: parse_bool(data.get(key, 'false'))
+        key: data[key]
         for key in symptoms
     })
 
 
 def parse_fever(data) -> Fever:
-    data = data.get('FEVER', {})
+    data = data['FEVER']
     return Fever(
-        maximumTemperatureInDegrees=parse_float(data.get('maximumTemperatureInDegrees', 'NaN')),
-        daysSinceMaximumTemperature=parse_int(data.get('daysSinceMaximumTemperature', 0)),
+        maximumTemperatureInDegrees=parse_float(data['maximumTemperatureInDegrees']),
+        daysSinceMaximumTemperature=parse_int(data['daysSinceMaximumTemperature']),
     )
 
 
 def parse_coughing(data) -> Coughing:
-    data = data.get('COUGHING', {})
+    data = data['COUGHING']
     return Coughing(
-        audio=parse_base64(data.get('audio', '')),
-        audioClassificationResult=parse_audio_classification_result(data.get('audioClassificationResult')),
-        type=parse_cough_type(data.get('type', 'UNKNOWN')),
-        phlegm=parse_bool(data.get('phlegm', 'false')),
-        bloodInCough=parse_bool(data.get('bloodInCough', 'false'))
+        audio=parse_base64(data['audio']),
+        audioClassificationResult=parse_audio_classification_result(data['audioClassificationResult']),
+        type=parse_cough_type(data['type']),
+        phlegm=data['phlegm'],
+        bloodInCough=data['bloodInCough']
     )
 
 
 def parse_travel(data) -> Travel:
-    data = data.get('TRAVEL', {})
+    data = data['TRAVEL']
     return Travel(
-        hasTravelled=parse_has_travelled(data.get('hasTravelled')),
-        abroadTravelCountryCode=data.get('abroadTravelCountryCode', ''),
+        hasTravelled=parse_has_travelled(data['hasTravelled']),
+        abroadTravelCountryCode=data['abroadTravelCountryCode'],
     )
 
 
 def parse_risk_group(data) -> RiskGroup:
-    data = data.get('RISK_GROUP', {})
+    data = data['RISK_GROUP']
     attributes = [
         'overFiftyYearsOld',
         'overSixtyYearsOld',
@@ -137,11 +121,11 @@ def parse_risk_group(data) -> RiskGroup:
         'consumptionOfImmunoSuppressantDrugs',
     ]
     return RiskGroup(**{
-        key: parse_bool(data.get(key, 'false'))
+        key: data[key]
         for key in attributes
     })
 
 
 def parse_workplace(data) -> Workplace:
-    data = data.get('WORKPLACE', {})
-    return Workplace[data.get('workplace').upper()]
+    data = data['WORKPLACE']
+    return Workplace[data['workplace'].upper()]
