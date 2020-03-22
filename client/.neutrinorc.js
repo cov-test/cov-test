@@ -1,7 +1,7 @@
 const airbnb = require('@neutrinojs/airbnb');
 const react = require('@neutrinojs/react');
 const jest = require('@neutrinojs/jest');
-require('typeface-work-sans');
+// require('typeface-work-sans');
 module.exports = {
   options: {
     root: __dirname,
@@ -11,12 +11,12 @@ module.exports = {
     react({
       html: {
         title: 'COVTest',
-        links: [
-          {
-            href: 'https://fonts.googleapis.com/css?family=Lato',
-            rel: 'stylesheet',
-          },
-        ],
+        // links: [
+        //   {
+        //     href: 'https://fonts.googleapis.com/css?family=Lato',
+        //     rel: 'stylesheet',
+        //   },
+        // ],
       },
     }),
     jest(),
