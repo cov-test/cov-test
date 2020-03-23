@@ -1,8 +1,10 @@
 import { hot } from 'react-hot-loader';
 import React from 'react';
 import Container from '@material-ui/core/Container';
-import { styled } from '@material-ui/core/styles';
+import { styled, ThemeProvider } from '@material-ui/core/styles';
 import { Router } from '@reach/router';
+import theme from '../config/theme';
+
 import { Home, Questionnary, Question } from './views';
 import './App.css';
 
@@ -12,11 +14,13 @@ const AppContainer = styled(Container)({
 const App = () => (
   <>
     <AppContainer maxWidth="sm" className="app">
-      <Router primary={false}>
-        <Home path="/" default />
-        <Questionnary path="/start" />
-        <Question path="/question" />
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router primary={false}>
+          <Home path="/" default />
+          <Questionnary path="/start" />
+          <Question path="/question" />
+        </Router>
+      </ThemeProvider>
     </AppContainer>
   </>
 );
