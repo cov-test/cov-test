@@ -18,7 +18,7 @@ const SpecialButton = (props) => {
   return (
     <>
       {selected ? (
-        <StyledButton color="primary">{title}</StyledButton>
+        <StyledButton variant="contained" color="primary">{title}</StyledButton>
       ) : (
         <StyledButton variant="outlined" color="primary">
           {title}

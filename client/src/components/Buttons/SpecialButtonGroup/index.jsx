@@ -2,19 +2,23 @@ import { hot } from 'react-hot-loader';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { SpecialButton } from '../special/index';
+import SpecialButton from '../special/index';
 
 const SpecialButtonGroup = (props) => {
-  const buttons = ['Test', 'Foobar'];
+  const { buttons } = props;
   return (
     <>
-      {buttons.map((item) => {
-        <SpecialButton selected={false} title={item} />;
-      })}
+      {buttons.map((button) => (
+        <>
+          <SpecialButton title={button} selected={true} />
+        </>
+      ))}
     </>
   );
 };
 
-SpecialButtonGroup.propTypes = {};
+SpecialButtonGroup.propTypes = {
+  buttons: PropTypes.arrayOf.isRequired,
+};
 
 export default hot(module)(SpecialButtonGroup);
