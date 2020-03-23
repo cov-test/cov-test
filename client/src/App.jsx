@@ -11,7 +11,7 @@ const AppContainer = styled(Container)({
 });
 const App = () => (
   <>
-    <AppContainer maxWidth={false} className="app">
+    <AppContainer maxWidth="sm" className="app">
       <Router primary={false}>
         <Home path="/" default />
         <Questionnary path="/start" />
