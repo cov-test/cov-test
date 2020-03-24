@@ -1,10 +1,15 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { SpecialButton } from '../index';
 
 export class Step1 extends Component {
   render() {
-    return <Fragment>sdsad</Fragment>;
+    return (
+      <Fragment>
+        <SpecialButton />
+      </Fragment>
+    );
   }
 }
 
