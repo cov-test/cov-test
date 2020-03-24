@@ -5,21 +5,31 @@ import NewReleasesOutlinedIcon from '@material-ui/icons/NewReleasesOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 import { Header } from '../../components';
 
 import './Home2.css';
 
-const Home2= () => (
+const Home2 = () => (
   <div className="Start">
-  <div className="cov">cov</div>
-  test
-  
-  Prüfe deine Sympthome, finde Hilfe im Corona-Fall oder hilf anderen Betroffenen.
+    <div className="content">
+      <div className="COV-test">
+        <div className="cov">COV</div>
+        <div className="test">test</div>
+      </div>
+      <div className="Prfe-deine-Sympthom">
+        Prüfe deine Sympthome, finde Hilfe im Corona-Fall oder hilf anderen Betroffenen.
+      </div>
 
-  In dieser von Unsicherheit geprägten Zeit ist es wichtig, informiert und gestärkt zu sein.
+      <div className="In-dieser-von-Unsich">
+        In dieser von Unsicherheit geprägten Zeit ist es wichtig, informiert und gestärkt zu sein.
+      </div>
 
-  Test starten
+      <Button variant="contained" size="large" className="Test-starten">
+        Test starten
+      </Button>
+    </div>
   </div>
 );
 

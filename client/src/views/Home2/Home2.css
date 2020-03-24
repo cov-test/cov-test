@@ -1,60 +1,99 @@
+:root{
+    --primary: #3f2c7a;
+    --grey-pale: #efedf2;
+    --white:#ffffff;
+}
+
+.COV-test {
+  width: 161px;
+  height: 174px;
+  /* opacity: 0.3; */
+  /* -webkit-filter: blur(30px);
+  filter: blur(30px); */
+  font-family: Lato;
+  font-size: 70px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: var(--grey-pale);
+}
+
+.COV-test .text-style-1 {
+  font-size: 75px;
+}
+
 .cov {
-    width: 145px;
-    height: 49px;
-    background-color: var(--grey-pale);
-  }
+  width: 145px;
+  height: 70px; 
+  color: var(--grey-pale);
+}
 
-  .Start {
-    width: 375px;
-    height: 745px;
-    background-color: var(--primary);
-  }
+.test {
+  width: 99px;
+  height: 40px; 
+  font-size: 60px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--grey-pale);
+}
 
-  .Prfe-deine-Sympthom {
-    width: 311px;
-    height: 84px;
-    opacity: 0.85;
-    font-family: Poppins;
-    font-size: 20px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: var(--white);
-  }
+.Start {
+  width: 375px;
+  height: 745px;
+  background-color: var(--primary);
+}
 
-  .In-dieser-von-Unsich {
-    width: 311px;
-    height: 78px;
-    opacity: 0.85;
-    font-family: Poppins;
-    font-size: 19px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: italic;
-    line-height: 1.37;
-    letter-spacing: normal;
-    color: rgba(239, 237, 242, 0.78);
-  }
+.Prfe-deine-Sympthom {
+  width: 311px;
+  height: 84px;
+  opacity: 0.85;
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: var(--white);
+}
 
-  .Rectangle {
-    width: 326px;
-    height: 50px;
-    border-radius: 12px;
-    background-color: #eeedf2;
-  }
+.In-dieser-von-Unsich {
+  width: 311px;
+  height: 78px;
+  opacity: 0.85;
+  font-family: Poppins;
+  font-size: 19px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: italic;
+  line-height: 1.37;
+  letter-spacing: normal;
+  color: rgba(239, 237, 242, 0.78);
+}
 
-  .Test-starten {
-    width: 327px;
-    height: 24px;
-    font-family: Lato;
-    font-size: 20px;
-    font-weight: 900;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: 0.3px;
-    text-align: center;
-    color: var(--primary);
-  }
+.Rectangle {
+  width: 326px;
+  height: 50px;
+  border-radius: 12px;
+  background-color: #eeedf2;
+}
+
+.Test-starten {
+  width: 327px;
+  height: 24px;
+  font-family: Lato;
+  font-size: 20px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+  text-align: center;
+  color: var(--primary);
+}
+
+.content
+{
+  padding:32px;
+}
