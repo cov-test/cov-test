@@ -17,6 +17,7 @@ const App = () => (
       <ThemeProvider theme={theme}>
         <Router primary={false}>
           <Home2 path="/" default />
+          <Home path='/home' />
           <Questionnary path="/start" />
           <Question path="/question" />
         </Router>

@@ -6,7 +6,7 @@ import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-
+import { Link } from "@reach/router";
 import { Header } from '../../components';
 
 import './Home2.css';
@@ -26,9 +26,11 @@ const Home2 = () => (
         In dieser von Unsicherheit geprägten Zeit ist es wichtig, informiert und gestärkt zu sein.
       </div>
 
-      <Button variant="contained" size="large" className="Test-starten">
-        Test starten
-      </Button>
+      <Link to="/home">
+        <Button variant="contained" size="large" className="Test-starten">
+          Test starten
+        </Button>
+      </Link>
     </div>
   </div>
 );
