@@ -18,6 +18,8 @@
   line-height: normal;
   letter-spacing: normal;
   color: var(--grey-pale);
+  margin-bottom: 32px;
+  margin-top: 70px;
 }
 
 .COV-test .text-style-1 {
@@ -56,6 +58,7 @@
   line-height: normal;
   letter-spacing: normal;
   color: var(--white);
+  margin-bottom: 24px;
 }
 
 .In-dieser-von-Unsich {
@@ -70,6 +73,7 @@
   line-height: 1.37;
   letter-spacing: normal;
   color: rgba(239, 237, 242, 0.78);
+  margin-bottom: 80px;
 }
 
 .Rectangle {
@@ -91,6 +95,7 @@
   letter-spacing: 0.3px;
   text-align: center;
   color: var(--primary);
+
 }
 
 .content
