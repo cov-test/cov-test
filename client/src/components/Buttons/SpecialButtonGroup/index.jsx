@@ -21,20 +21,21 @@ class SpecialButtonGroup extends Component {
 
   handleButtonClick = (id) => {
     const { onSelectionChange } = this.props;
-    console.log(this.state.selectedButtons.has(id));
-    if (!this.state.selectedButtons.has(id)) {
+    const {selectedButtons} = this.state
+    console.log(selectedButtons.has(id));
+    if (!selectedButtons.has(id)) {
       this.setState({
-        selectedButtons: this.state.selectedButtons.add(id),
+        selectedButtons: selectedButtons.add(id),
       });
     } else {
       console.log('cannot add');
-      let tempSelected = new Set([...this.state.selectedButtons]);
+      let tempSelected = new Set([...selectedButtons]);
       tempSelected.delete(id);
       this.setState({
         selectedButtons: tempSelected,
       });
     }
-    onSelectionChange(this.state.selectedButtons);
+    onSelectionChange(selectedButtons);
   };
 
   render() {
