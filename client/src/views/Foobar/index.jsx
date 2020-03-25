@@ -5,7 +5,7 @@ import { SpecialButtonGroup } from '../../components';
 
 const Foobar = () => (
   <>
-    <SpecialButtonGroup buttons={['Button1', 'Button2', 'Foobar']} />
+    <SpecialButtonGroup buttons={['Button1', 'Button2', 'Foobar', 'Test', 'Yolo', 'More button', 'And even more']} />
   </>
 );
 

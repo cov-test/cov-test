@@ -11,16 +11,20 @@ const StyledButton = styled(Button)({
   paddingRight: '16px',
   paddingTop: '12px',
   paddingBottom: '12px',
+  margin: '5px',
 });
+
 
 const SpecialButton = (props) => {
   const { selected, title } = props;
   return (
     <>
       {selected ? (
-        <StyledButton variant="contained" color="primary">{title}</StyledButton>
+        <StyledButton variant="contained" color="primary" onClick={props.onButtonClick}>
+          {title}
+        </StyledButton>
       ) : (
-        <StyledButton variant="outlined" color="primary">
+        <StyledButton variant="outlined" color="primary" onClick={props.onButtonClick}>
           {title}
         </StyledButton>
       )}
@@ -31,6 +35,7 @@ const SpecialButton = (props) => {
 SpecialButton.propTypes = {
   selected: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
+  onButtonClick: PropTypes.func.isRequired,
 };
 
 export default hot(module)(SpecialButton);
