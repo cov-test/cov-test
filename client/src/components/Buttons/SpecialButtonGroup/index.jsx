@@ -16,9 +16,11 @@ class SpecialButtonGroup extends Component {
 
   static propTypes = {
     buttons: PropTypes.arrayOf.isRequired,
+    onSelectionChange: PropTypes.func.isRequired,
   };
 
   handleButtonClick = (id) => {
+    const { onSelectionChange } = this.props;
     console.log(this.state.selectedButtons.has(id));
     if (!this.state.selectedButtons.has(id)) {
       this.setState({
@@ -32,6 +34,7 @@ class SpecialButtonGroup extends Component {
         selectedButtons: tempSelected,
       });
     }
+    onSelectionChange(this.state.selectedButtons);
   };
 
   render() {
