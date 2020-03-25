@@ -11,7 +11,7 @@ const StyledButton = styled(Button)({
   paddingRight: '16px',
   paddingTop: '12px',
   paddingBottom: '12px',
-  margin: '5px',
+  margin: '4px',
 });
 
 
