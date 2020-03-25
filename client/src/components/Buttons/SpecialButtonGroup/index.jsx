@@ -21,14 +21,12 @@ class SpecialButtonGroup extends Component {
 
   handleButtonClick = (id) => {
     const { onSelectionChange } = this.props;
-    const {selectedButtons} = this.state
-    console.log(selectedButtons.has(id));
+    const { selectedButtons } = this.state;
     if (!selectedButtons.has(id)) {
       this.setState({
         selectedButtons: selectedButtons.add(id),
       });
     } else {
-      console.log('cannot add');
       let tempSelected = new Set([...selectedButtons]);
       tempSelected.delete(id);
       this.setState({
@@ -39,15 +37,17 @@ class SpecialButtonGroup extends Component {
   };
 
   render() {
+    const { buttons } = this.props;
+    const { selectedButtons } = this.state;
     return (
       <Box display="flex" flexDirection="row" flexWrap="wrap">
-        {this.props.buttons.map((button, index) => (
+        {buttons.map((button, index) => (
           <SpecialButton
             title={button}
             onButtonClick={() => {
               this.handleButtonClick(index);
             }}
-            selected={this.state.selectedButtons.has(index)}
+            selected={selectedButtons.has(index)}
           />
         ))}
       </Box>
