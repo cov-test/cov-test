@@ -1,19 +1,34 @@
 import { hot } from 'react-hot-loader';
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Box, Typography } from '@material-ui/core';
+import { styled, makeStyles } from '@material-ui/core';
+
 import InfoIcon from '../Icons/info';
 
-function Hint(props) {
+const StyledIcon = styled(InfoIcon)({
+  marginRight: '16px',
+});
+
+const useStyles = makeStyles(() => ({
+  hintText: {
+    width: '232px',
+  },
+}));
+
+const Hint = (props) => {
   const { text } = props;
+  const classes = useStyles();
   return (
-    <>
-      <InfoIcon />
-      {text}
-    </>
+    <Box display="flex" flexDirection="row" flexWrap="wrap">
+      <StyledIcon />
+      <Typography color="primary" className={classes.hintText}>
+        {text}
+      </Typography>
+    </Box>
   );
-}
+};
 
 Hint.propTypes = {
   text: PropTypes.string.isRequired,
