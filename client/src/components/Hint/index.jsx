@@ -8,12 +8,13 @@ import { styled, makeStyles } from '@material-ui/core';
 import InfoIcon from '../Icons/info';
 
 const StyledIcon = styled(InfoIcon)({
-  marginRight: '16px',
+  marginRight: '1rem',
 });
 
 const useStyles = makeStyles(() => ({
   hintText: {
-    width: '232px',
+    whiteSpace: 'pre-line',
+    marginBottom: '1.5rem',
   },
 }));
 

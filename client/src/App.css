@@ -51,6 +51,8 @@
 
 .header {
   margin-bottom: 10px;
+  background-color: #3f2c7a;
+  box-shadow: 0 4px 2px 2px #3f2c7a;
 }
 
 .questionnary {
@@ -60,4 +62,14 @@
   display: flex;
   flex-direction: column;
   padding: 0 16px;
+}
+
+.MuiFormControlLabel-label {
+  border-radius: 10px;
+  border: solid 1.3px rgba(63, 44, 122, 0.8);
+  padding: 15px;
+}
+
+.MuiFormControlLabel-root {
+  margin: 4px;
 }
