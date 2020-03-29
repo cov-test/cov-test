@@ -15,19 +15,24 @@ const Title = () => (
   </Typography>
 );
 
-const MyRadio = ({ options, id, question }) => {
-  const renderedoptions = options.map((opt, idx) => (
-    <FormControlLabel value={idx} control={<Radio />} label={opt} name={id} key={id + idx} />
-  ));
+const MyRadio = ({ options, id, question, preselected,info }) => {
+  const renderedoptions = options.map((opt, idx) => <FormControlLabel value={idx} control={<Radio />} label={opt} />);
+  const [value, setValue] = React.useState(preselected);
+  const handleChange = (event) => {
+    setValue(eval(event.target.value));
+  };
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">{question}</FormLabel>
-      <RadioGroup name={id}>{renderedoptions}</RadioGroup>
+
+      <RadioGroup name={id} value={value} onChange={handleChange}>
+        {renderedoptions}
+      </RadioGroup>
     </FormControl>
   );
 };
 
-const Hustenview0 = () => (
+const Hustenview = () => (
   <>
     <Header />
     <div className="home">
@@ -35,37 +40,48 @@ const Hustenview0 = () => (
       <MyRadio
         id="husten.hustentyp"
         question="Dein Husten ist eher..."
-        options={['Trocken', 'Feucht', 'Ich weiss nicht']}
-        preselected={2}
+        options={['Trocken', 'Feucht', 'Ich weiss nicht','Kein Husten']}
+        preselected={1}
       />
       <MyRadio
         id="husten.auswurf"
         info="Auswurf sind die (manchmal gelben) ausgehusteten Absonderungen der Atemswegschleimhäute"
         question="Hast Du Auswurf?"
         options={['Ja', 'Nein']}
-        preselected={2}
+        preselected={1}
       />
-      <MyRadio id="husten.blut" question="Hustet Du Blut?" options={['Ja', 'Nein']} preselected={2} />
+      <MyRadio id="husten.blut" question="Hustet Du Blut?" options={['Ja', 'Nein']} preselected={1} />
     </div>
   </>
 );
 
-const Hustenview = () => (
-  <>
-    <Header />
-    <div className="home">
-      <Title />
-      <FormControl component="fieldset">
-        <FormLabel component="legend">Gender</FormLabel>
-        <RadioGroup aria-label="gender" name="gender1" onChange={()=>{alert(1);}}>
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="other" control={<Radio />} label="Other" />
-          <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" />
-        </RadioGroup>
-      </FormControl>
-    </div>
-  </>
-);
+const Hustenview2 = () => {
+  const [value, setValue] = React.useState('female');
+
+  return (
+    <>
+      <Header />
+      <div className="home">
+        <Title />
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Gender</FormLabel>
+          <RadioGroup
+            value={value}
+            aria-label="gender"
+            name="gender1"
+            onChange={(event) => {
+              setValue(event.target.value);
+            }}
+          >
+            <FormControlLabel value="female" control={<Radio />} label="Female" />
+            <FormControlLabel value="male" control={<Radio />} label="Male" />
+            <FormControlLabel value="other" control={<Radio />} label="Other" />
+            <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" />
+          </RadioGroup>
+        </FormControl>
+      </div>
+    </>
+  );
+};
 
 export default hot(module)(Hustenview);
