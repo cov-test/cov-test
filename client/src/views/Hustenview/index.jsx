@@ -19,5 +19,5 @@ const Hustenview = () => (
   </>
 );
 
-//export default hot(module)(HustenView);
-export default Hustenview;
+export default hot(module)(Hustenview);
+
