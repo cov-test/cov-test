@@ -8,6 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
 import { Header } from '../../components';
+import Hint from '../../components/Hint';
 
 const Title = () => (
   <Typography component="p" variant="subtitle1" color="inherit">
@@ -19,12 +20,12 @@ const MyRadio = ({ options, id, question, preselected,info }) => {
   const renderedoptions = options.map((opt, idx) => <FormControlLabel value={idx} control={<Radio />} label={opt} />);
   const [value, setValue] = React.useState(preselected);
   const handleChange = (event) => {
-    setValue(eval(event.target.value));
+    setValue(parseInt(event.target.value));
   };
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">{question}</FormLabel>
-
+      {info!=undefined?<Hint text={info}/>:<span/>}
       <RadioGroup name={id} value={value} onChange={handleChange}>
         {renderedoptions}
       </RadioGroup>
@@ -41,7 +42,7 @@ const Hustenview = () => (
         id="husten.hustentyp"
         question="Dein Husten ist eher..."
         options={['Trocken', 'Feucht', 'Ich weiss nicht','Kein Husten']}
-        preselected={1}
+        preselected={3}
       />
       <MyRadio
         id="husten.auswurf"
@@ -55,33 +56,5 @@ const Hustenview = () => (
   </>
 );
 
-const Hustenview2 = () => {
-  const [value, setValue] = React.useState('female');
-
-  return (
-    <>
-      <Header />
-      <div className="home">
-        <Title />
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Gender</FormLabel>
-          <RadioGroup
-            value={value}
-            aria-label="gender"
-            name="gender1"
-            onChange={(event) => {
-              setValue(event.target.value);
-            }}
-          >
-            <FormControlLabel value="female" control={<Radio />} label="Female" />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
-            <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" />
-          </RadioGroup>
-        </FormControl>
-      </div>
-    </>
-  );
-};
 
 export default hot(module)(Hustenview);
