@@ -14,17 +14,16 @@ const StyledButton = styled(Button)({
   margin: '4px',
 });
 
-
 const SpecialButton = (props) => {
-  const { selected, title } = props;
+  const { onButtonClick, selected, title } = props;
   return (
     <>
       {selected ? (
-        <StyledButton variant="contained" color="primary" onClick={props.onButtonClick}>
+        <StyledButton variant="contained" color="primary" onClick={onButtonClick}>
           {title}
         </StyledButton>
       ) : (
-        <StyledButton variant="outlined" color="primary" onClick={props.onButtonClick}>
+        <StyledButton variant="outlined" color="primary" onClick={onButtonClick}>
           {title}
         </StyledButton>
       )}

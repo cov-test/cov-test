@@ -1,27 +1,56 @@
-import React, { Fragment, Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Step1 } from '../../components';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import MobileStepper from '@material-ui/core/MobileStepper';
+import { Step1, HandleActionButton, Header } from '../../components';
 
-export class Question extends Component {
-  render() {
-    const { questionFinish } = this.props;
-    return (
-      <Fragment>
-        <Step1 />
-      </Fragment>
-    );
-  }
-}
+export const Question = () => {
+  const useStyles = makeStyles({
+    stepper: {
+      flexGrow: 1,
+      background: 'transparent',
+      marginTop: '0.8rem',
+    },
+    root: {
+      margin: '15px',
+    },
+  });
+  const classes = useStyles();
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = React.useState(0);
 
-Question.propTypes = {
-  questionFinish: PropTypes.bool.isRequired,
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+  return (
+    <>
+      <Header />
+      <div className={classes.root}>
+        <MobileStepper variant="dots" steps={6} position="static" activeStep={activeStep} className={classes.stepper} />
+        {
+          {
+            0: <Step1 />,
+            1: <Step1 />,
+          }[activeStep]
+        }
+        <div>
+          <HandleActionButton endIcon={false} title="" onButtonClick={handleBack} />{' '}
+          <HandleActionButton endIcon={true} title="weiter" onButtonClick={handleNext} />
+        </div>
+      </div>
+    </>
+  );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    // questionFinish: isQuestionFinish(state),
-  };
+Question.propTypes = {};
+
+const mapStateToProps = () => {
+  return {};
 };
 
 export default connect(mapStateToProps, {})(Question);
