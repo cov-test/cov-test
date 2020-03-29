@@ -5,7 +5,9 @@ import * as tfjs from '@tensorflow/tfjs';
 
 //config section
 const URL = 'https://www.brainsignals.de/cough-test/my_model/'; //TODO put here the URL that depends on the deployment
-const detectiondbg = 0; //if 1 then it shows the accumulating scores
+//const URL = 'file://../../../assets/model/'; //TODO put here the URL that depends on the deployment
+//const URL="file:///work/corona/git/cov-test/ml/my_model/"
+const detectiondbg = 1; //if 1 then it shows the accumulating scores
 const thr1 = 0.7;
 const nrseconds = 16;
 const maxframes = 7;
@@ -18,7 +20,6 @@ const maxframes = 7;
 async function createModel() {
   const checkpointURL = URL + 'model.json'; // model topology
   const metadataURL = URL + 'metadata.json'; // model metadata
-
   const recognizer = speechCommands.create(
     'BROWSER_FFT', // fourier transform type, not useful to change
     undefined, // speech commands vocabulary feature, not useful for your models
@@ -45,7 +46,7 @@ async function classify() {
   await sleep(100);
 
   //decision logic
-  mx = Math.max(allscores[0], allscores[1]);
+  let mx = Math.max(allscores[0], allscores[1]);
   if (mx < thr1) return 0; //no cough
   if (allscores[0] > allscores[1]) return 1;
   //dry
@@ -94,7 +95,7 @@ async function init() {
     },
   );
 
-  ready = new Promise(function (resolve, reject) {
+  let ready = new Promise(function (resolve, reject) {
     // Stop the recognition in 5 seconds.
     tobj = setInterval(() => {
       if (frames > maxframes) {
