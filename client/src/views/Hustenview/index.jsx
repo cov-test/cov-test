@@ -9,6 +9,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 import { Header } from '../../components';
 import Hint from '../../components/Hint';
+import classify from './classif.js';
 
 const Title = () => (
   <Typography component="p" variant="subtitle1" color="inherit">
@@ -16,7 +17,7 @@ const Title = () => (
   </Typography>
 );
 
-const MyRadio = ({ options, id, question, preselected,info }) => {
+const MyRadio = ({ options, id, question, preselected, info }) => {
   const renderedoptions = options.map((opt, idx) => <FormControlLabel value={idx} control={<Radio />} label={opt} />);
   const [value, setValue] = React.useState(preselected);
   const handleChange = (event) => {
@@ -25,7 +26,7 @@ const MyRadio = ({ options, id, question, preselected,info }) => {
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">{question}</FormLabel>
-      {info!=undefined?<Hint text={info}/>:<span/>}
+      {info != undefined ? <Hint text={info} /> : <span />}
       <RadioGroup name={id} value={value} onChange={handleChange}>
         {renderedoptions}
       </RadioGroup>
@@ -33,17 +34,25 @@ const MyRadio = ({ options, id, question, preselected,info }) => {
   );
 };
 
+const recordAndClassif = async function () {
+  alert(await classify());
+};
+
 const Hustenview = () => (
   <>
     <Header />
     <div className="home">
       <Title />
+      <div id="label-container" />
       <MyRadio
         id="husten.hustentyp"
         question="Dein Husten ist eher..."
-        options={['Trocken', 'Feucht', 'Ich weiss nicht','Kein Husten']}
+        options={['Trocken', 'Feucht', 'Ich weiss nicht', 'Kein Husten']}
         preselected={3}
       />
+      <button id="recordingbtn" type="button" onClick={recordAndClassif}>
+        Klassifiziere meinen Husten!
+      </button>
       <MyRadio
         id="husten.auswurf"
         info="Auswurf sind die (manchmal gelben) ausgehusteten Absonderungen der Atemswegschleimhäute"
@@ -55,6 +64,5 @@ const Hustenview = () => (
     </div>
   </>
 );
-
 
 export default hot(module)(Hustenview);
