@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@material-ui/core';
 
-import SpecialButton from '../special/index';
+import SpecialButton from '../Special';
 
 class SpecialButtonGroup extends Component {
   constructor(props) {

@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader';
-import React, { Component } from 'react';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -15,7 +15,8 @@ function Questionnary() {
   return (
     <div className="questionnary">
       <Typography component="h1" variant="h1" color="inherit">
-        <strong>COV</strong> test
+        <strong>COV</strong>
+        test
       </Typography>
       <Typography component="p" variant="subtitle1" color="inherit">
         Prüfe deine Sympthome, finde Hilfe im Corona-Fall oder hilf anderen Betroffenen.
