@@ -4,5 +4,4 @@ export { default as Step1 } from './Steps/step1';
 export { default as SpecialButton } from './Buttons/Special';
 export { default as HandleActionButton } from './Buttons/HandleAction';
 export { default as Hint } from './Hint';
-export { default as SpecialButton } from './Buttons/special';
 export { default as DatePicker } from './DatePicker';

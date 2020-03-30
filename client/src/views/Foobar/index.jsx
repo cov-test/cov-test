@@ -1,8 +1,6 @@
 import { hot } from 'react-hot-loader';
 import React, { Component } from 'react';
 import { DatePicker } from '../../components';
-import SpecialButtonGroup from '../../components/Buttons/SpecialButtonGroup';
-import SpecialButton from '../../components/Buttons/special';
 
 class Foobar extends Component {
   constructor(props) {
