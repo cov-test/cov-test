@@ -21,7 +21,8 @@ const FormControlStyled = styled(FormControl)({
 });
 
 const handleChange = (event) => {
-  setValue(event.target.value);
+  event.preventdefault();
+  // do it later another branch
 };
 const Step1 = () => (
   <>
