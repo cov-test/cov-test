@@ -7,23 +7,27 @@ import DateFnsUtils from '@date-io/date-fns';
 import SpecialButtonGroup from '../Buttons/SpecialButtonGroup';
 
 const DatePicker = ({ fastSelection, selectedDate, onChange }) => {
+  const compareFastSelection = (date) => {
+    console.log('piiiiiep');
+    const selDateInCompareSelection = fastSelection
+      .map((el) => el.date)
+      .findIndex((mydate) => mydate.getTime() === date.getTime());
+    let returnSet = new Set();
+    if (selDateInCompareSelection !== -1) {
+      returnSet.add(selDateInCompareSelection);
+    }
+    return returnSet;
+  };
 
-  const selDateinFastSel = fastSelection
-    .map((el) => el.date)
-    .findIndex((mydate) => mydate.getTime() === selectedDate.getTime());
-  let selSet = new Set();
-  if (selDateinFastSel !== -1) {
-    selSet.add(selDateinFastSel);
-  }
-  
-  const [currentSelection, setCurrentSelection] = useState(selSet);
+  const [currentSelection, setCurrentSelection] = useState(compareFastSelection(selectedDate));
 
   const handleDateChange = (date) => {
     onChange(date);
+    setCurrentSelection(compareFastSelection(date))
   };
 
   const handleButtonClick = (selection) => {
-    setCurrentSelection(selection);
+    // setCurrentSelection(selection);
     handleDateChange(fastSelection[Array.from(selection).pop()].date);
   };
 
