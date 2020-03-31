@@ -1,17 +1,26 @@
 import { hot } from 'react-hot-loader';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@material-ui/core';
 
 import SpecialButton from '../Special';
 
-const SpecialButtonGroup = ({ buttons, multiSelect, currentSelection, onSelectionChange }) => {
+const SpecialButtonGroup = ({ buttons, multiSelect, onSelectionChange }) => {
+  const [selectedButtons, setSelectedButtons] = useState(new Set());
+
   const handleButtonClick = (id) => {
     if (!multiSelect) {
-      onSelectionChange(new Set([id]));
+      setSelectedButtons(new Set([id]));
     } else {
-      onSelectionChange(currentSelection.add(id));
+      if (!selectedButtons.has(id)) {
+        setSelectedButtons(selectedButtons.add(id));
+      } else {
+        let tempSelected = new Set([...selectedButtons]);
+        tempSelected.delete(id);
+        setSelectedButtons(tempSelected);
+      }
     }
+    onSelectionChange(selectedButtons);
   };
 
   return (
@@ -22,7 +31,7 @@ const SpecialButtonGroup = ({ buttons, multiSelect, currentSelection, onSelectio
           onButtonClick={() => {
             handleButtonClick(index);
           }}
-          selected={currentSelection.has(index)}
+          selected={selectedButtons.has(index)}
         />
       ))}
     </Box>
@@ -32,7 +41,6 @@ const SpecialButtonGroup = ({ buttons, multiSelect, currentSelection, onSelectio
 SpecialButtonGroup.propTypes = {
   buttons: PropTypes.arrayOf.isRequired,
   multiSelect: PropTypes.bool,
-  currentSelection: PropTypes.any,
   onSelectionChange: PropTypes.func.isRequired,
 };
 

@@ -10,7 +10,7 @@ class Foobar extends Component {
       selectedDate: new Date(),
     };
   }
-
+ 
   handleDatepickerUpdate = (date) => {
     this.setState({
       selectedDate: date,
