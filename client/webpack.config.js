@@ -1,6 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-
 module.exports = {
   entry: './index.js',
   output: {
@@ -34,6 +33,10 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif|json)$/,
         use: ['file-loader'],
+      },
+      {
+        test: /\.json$/,
+        loader: require.resolve('json-loader'),
       },
     ],
   },
