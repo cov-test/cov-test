@@ -23,7 +23,7 @@ i18n
     debug: true,
 
     backend: {
-      loadPath: '/src/assets/locales/{{lng}}/{{ns}}.json',
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
 
     interpolation: {
