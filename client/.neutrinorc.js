@@ -21,4 +21,12 @@ module.exports = {
     }),
     jest(),
   ],
+  module: {
+    loaders: [
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
+    ],
+  },
 };
