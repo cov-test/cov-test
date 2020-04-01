@@ -3,6 +3,8 @@ import React, { Suspense } from 'react';
 import Container from '@material-ui/core/Container';
 import { styled, ThemeProvider, withStyles } from '@material-ui/core/styles';
 import { Router } from '@reach/router';
+import { Provider } from 'react-redux';
+import store from './store/store';
 import theme from '../config/theme';
 
 // import i18n (needs to be bundled ;))
@@ -23,7 +25,7 @@ const GlobalCss = withStyles({
   },
 })(() => null);
 const App = () => (
-  <>
+  <Provider store={store}>
     <Suspense fallback="loading">
       <GlobalCss />
       <AppContainer maxWidth="sm" className="app">
@@ -37,7 +39,7 @@ const App = () => (
         </ThemeProvider>
       </AppContainer>
     </Suspense>
-  </>
+  </Provider>
 );
 
 export default hot(module)(App);

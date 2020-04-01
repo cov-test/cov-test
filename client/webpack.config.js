@@ -1,6 +1,40 @@
-// Whilst the configuration object can be modified here, the recommended way of making
-// changes is via the presets' options or Neutrino's API in `.neutrinorc.js` instead.
-// Neutrino's inspect feature can be used to view/export the generated configuration.
-const neutrino = require('neutrino');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
-module.exports = neutrino().webpack();
+module.exports = {
+  entry: './index.js',
+  output: {
+    filename: 'bundle.[hash].js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html',
+    }),
+  ],
+  resolve: {
+    modules: [__dirname, 'src', 'node_modules'],
+    extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: require.resolve('babel-loader'),
+        query: {
+          presets: ['@babel/react', '@babel/preset-env'],
+          plugins: ['@babel/proposal-class-properties'],
+        },
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|gif|json)$/,
+        use: ['file-loader'],
+      },
+    ],
+  },
+};
