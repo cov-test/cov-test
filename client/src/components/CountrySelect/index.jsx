@@ -13,7 +13,8 @@ const StyledSelect = styled(Select)({
 
 const CountrySelect = ({ label, onChange }) => {
   const onChangeListener = (selectedOptions) => {
-    onChange(selectedOptions.map((el) => el.value));
+    const selValue = selectedOptions.map((el) => el.value);
+    onChange(selValue ? selValue : []);
   };
   return (
     <>
