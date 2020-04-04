@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
-import { Step1, HandleActionButton, Header, Step2, Step3 } from '../../components';
+import { Step1, HandleActionButton, Header, Step2, Step3, Step4 } from '../../components';
 
 export const Question = () => {
   const useStyles = makeStyles({
@@ -28,18 +28,19 @@ export const Question = () => {
   };
 
   const handleChange = (value) => {
-    //set current answer in the stroe
+    console.log(value);
   };
   return (
     <>
       <Header />
       <div className={classes.root}>
-        <MobileStepper variant="dots" steps={6} position="static" activeStep={activeStep} className={classes.stepper} />
+        <MobileStepper variant="dots" steps={8} position="static" activeStep={activeStep} className={classes.stepper} />
         {
           {
             0: <Step1 onChange={handleChange} />,
-            1: <Step2 />,
+            1: <Step2 onChange={handleChange} />,
             2: <Step3 onChange={handleChange} />,
+            3: <Step4 onChange={handleChange} />,
           }[activeStep]
         }
         <div className={classes.root}>
