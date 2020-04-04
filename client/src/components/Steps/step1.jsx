@@ -1,47 +1,47 @@
 import { hot } from 'react-hot-loader';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
+import RadioGroup from '../RadioGroup';
+import PropTypes from 'prop-types';
 
-import { styled } from '@material-ui/core';
 import Hint from '../Hint';
 
-const Headline = styled(Typography)({
-  fontFamily: 'Lato',
-  fontSize: '16px',
-  fontWeight: 900,
-  lineHeight: 1.5,
-  color: '#3f2c7a',
-});
-const FormControlStyled = styled(FormControl)({
-  border: 0,
-});
+const Step1 = ({ onChange }) => {
+  const onContactInfectedChangeListener = (value) => {
+    onChange({
+      contactInfected: value,
+    });
+  };
 
-const handleChange = (event) => {
-  event.preventdefault();
-  // do it later another branch
+  const mycontrols = [
+    {
+      value: 'no',
+      label: 'Nein',
+    },
+    {
+      value: 'maybe',
+      label: 'Ja, sie/er hat vielleicht Corona',
+    },
+    {
+      value: 'yes',
+      label: 'Ja, sie wurde positiv auf COVID-19 getestet',
+    },
+  ];
+  return (
+    <>
+      <Typography variant="body2" color="primary">
+        Hattest Du Kontakt zu einer erkrankten Person?
+      </Typography>
+      <Hint
+        text={`Als Kontakt gilt \n•  jemanden für mehr als 15min treffen \n•  physischer Kontakt wie Hände schütteln oder küssen`}
+      />
+      <RadioGroup identifier="contactInfected" onChange={onContactInfectedChangeListener} controls={mycontrols} />
+    </>
+  );
 };
-const Step1 = () => (
-  <>
-    <Headline component="h1" variant="h1" color="inherit">
-      Hattest Du Kontakt zu einer erkrankten Person?
-    </Headline>
-    <Hint
-      text={`Als Kontakt gilt \n•  jemanden für mehr als 15min treffen \n•  physischer Kontakt wie Hände schütteln oder küssen`}
-    />
-    <FormControlStyled component="fieldset">
-      <RadioGroup aria-label="CONTACT_TO_INFECTED_PERSON" name="CONTACT_TO_INFECTED_PERSON" onChange={handleChange}>
-        <FormControlLabel value="no" control={<Radio />} label="Nein" />
-        <FormControlLabel value="maybe" control={<Radio />} label="Ja, sie/er hat vielleicht Corona" />
-        <FormControlLabel value="yes" control={<Radio />} label="Ja, sie wurde positiv auf COVID-19 getestet" />
-      </RadioGroup>
-    </FormControlStyled>
-  </>
-);
 
-Step1.propTypes = {};
+Step1.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
 
 export default hot(module)(Step1);
