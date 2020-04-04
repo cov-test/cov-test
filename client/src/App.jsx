@@ -35,7 +35,6 @@ const App = () => (
             <Questionnary path="/start" />
             <Question path="/question" />
             <TranslationTest path="/transl" />
-            <Foobar path="/foobar" />
           </Router>
         </ThemeProvider>
       </AppContainer>
