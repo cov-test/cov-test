@@ -102,7 +102,7 @@ Wenn die Entwicklung der mobilen App abgeschlossen ist, werden wir diese kostenl
 ## Mehr über die Entwicklung von COVtest
 Unseren Fortschritt kannst Du bei Devpost [https://devpost.com/software/1_020_a_corona-testprozesse_corona-test-mit-dem-handy-254] und Jira [https://covtest.atlassian.net] mitverfolgen.
 
-Wenn Du Dich an der Entwicklung beteiligen möchtest, erreichst Du per E-Mail: contact.covtest@gmail.com.
+Wenn Du Dich an der Entwicklung beteiligen möchtest, erreichst Du uns per E-Mail: contact.covtest@gmail.com.
 
 
 
