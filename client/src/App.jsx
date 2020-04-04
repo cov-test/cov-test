@@ -10,7 +10,7 @@ import theme from '../config/theme';
 // import i18n (needs to be bundled ;))
 import './i18n';
 
-import { Home, Questionnary, Question, TranslationTest } from './views';
+import { Home, Questionnary, Question } from './views';
 import './App.css';
 
 const AppContainer = styled(Container)({
@@ -34,7 +34,6 @@ const App = () => (
             <Home path="/" default />
             <Questionnary path="/start" />
             <Question path="/question" />
-            <TranslationTest path="/transl" />
           </Router>
         </ThemeProvider>
       </AppContainer>
