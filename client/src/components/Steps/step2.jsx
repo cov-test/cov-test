@@ -1,5 +1,6 @@
 import { hot } from 'react-hot-loader';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Hint from '../Hint';
 import RadioGroup from '../RadioGroup';
@@ -10,7 +11,20 @@ class Step2 extends Component {
 
     this.state = {
       selectedDate: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
+      sameHousehold: '',
     };
+  }
+
+  componentDidUpdate(nextProps, nextState) {
+    const { selectedDate, sameHousehold } = this.state;
+    const { onChange } = this.props;
+
+    if (nextState.selectedDate != selectedDate || nextState.sameHousehold != sameHousehold) {
+      onChange({
+        daysSinceContact: selectedDate,
+        sameHousehold: sameHousehold,
+      });
+    }
   }
 
   handleDatepickerUpdate = (date) => {
@@ -53,10 +67,8 @@ class Step2 extends Component {
     };
 
     const handleChange = (value) => {
-      const { onChange } = this.props;
-      onChange({
+      this.setState({
         sameHousehold: value,
-        daysSinceContact: this.state.selectedDate,
       });
     };
     return (

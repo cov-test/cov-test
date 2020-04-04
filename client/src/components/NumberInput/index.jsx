@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { TextField, Box, makeStyles, styled } from '@material-ui/core';
 
 const useStyles = makeStyles(() => {
-  unitLabel: {
+  unitLabelClass: {
     textAlign: 'center';
   }
 });
@@ -33,7 +33,7 @@ const NumberInput = ({ value, isRequired, label, unitLabel, minValue, maxValue, 
           value={value}
           onChange={onChangeListener}
         />
-        <div className={classes.unitLabel}>{unitLabel}</div>
+        <div className={classes.unitLabelClass}>{unitLabel}</div>
       </Box>
     </>
   );
@@ -43,7 +43,7 @@ NumberInput.propTypes = {
   value: PropTypes.number.isRequired,
   isRequired: PropTypes.bool,
   label: PropTypes.string.isRequired,
-  unitLabel: PropTypes.string,
+  unitLabel: PropTypes.string.isRequired,
   minValue: PropTypes.number,
   maxValue: PropTypes.number,
   stepsValue: PropTypes.number,

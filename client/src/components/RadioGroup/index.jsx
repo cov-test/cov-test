@@ -10,7 +10,7 @@ const FormControlStyled = styled(FormControl)({
 
 const MyRadioGroup = ({ identifier, controls, onChange }) => {
   const handleChange = (evt) => {
-    evt.preventdefault();
+    // evt.preventdefault();
     onChange(evt.target.value);
   };
   return (

@@ -15,7 +15,6 @@ const SpecialButtonGroup = ({ buttons, multiSelect, currentSelection, onSelectio
       onSelectionChange(currentSelection.add(id));
     }
   };
-  console.log(currentSelection);
   return (
     <Box display="flex" flexDirection="row" flexWrap="wrap">
       {buttons.map((button, index) => (
