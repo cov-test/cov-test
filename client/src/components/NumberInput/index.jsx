@@ -1,6 +1,7 @@
 import { hot } from 'react-hot-loader';
 import React from 'react';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 
 import { TextField, Box, makeStyles, styled } from '@material-ui/core';
 
@@ -22,13 +23,14 @@ const NumberInput = ({ value, isRequired, label, unitLabel, minValue, maxValue, 
 
   return (
     <>
+      <Typography variant="subtitle2" color="primary">
+        {label}
+      </Typography>
       <Box display="flex" flexDirection="row" flexWrap="wrap" alignItems="center">
         <StyledInput
           required={isRequired}
           type="number"
           InputProps={{ inputProps: { min: minValue, max: maxValue, step: stepsValue } }}
-          label={label}
-          InputLabelProps={{ shrink: true }}
           variant="outlined"
           value={value}
           onChange={onChangeListener}

@@ -73,3 +73,6 @@
 .MuiFormControlLabel-root {
   margin: 4px;
 }
+.flex-row {
+  flex-direction: row;
+}
