@@ -33,7 +33,7 @@ const NumberInput = ({ value, isRequired, label, unitLabel, minValue, maxValue, 
           value={value}
           onChange={onChangeListener}
         />
-        <div className={classes.unitLabel}>lalala</div>
+        <div className={classes.unitLabel}>{unitLabel}</div>
       </Box>
     </>
   );
