@@ -1,3 +1,5 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
 import { hot } from 'react-hot-loader';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -13,16 +15,17 @@ const SpecialButtonGroup = ({ buttons, multiSelect, currentSelection, onSelectio
       onSelectionChange(currentSelection.add(id));
     }
   };
-
+  console.log(currentSelection);
   return (
     <Box display="flex" flexDirection="row" flexWrap="wrap">
       {buttons.map((button, index) => (
         <SpecialButton
+          key={index}
           title={button}
           onButtonClick={() => {
             handleButtonClick(index);
           }}
-          selected={currentSelection.has(index)}
+          selected={currentSelection ? currentSelection.has(index) : false}
         />
       ))}
     </Box>
@@ -30,7 +33,7 @@ const SpecialButtonGroup = ({ buttons, multiSelect, currentSelection, onSelectio
 };
 
 SpecialButtonGroup.propTypes = {
-  buttons: PropTypes.arrayOf.isRequired,
+  buttons: PropTypes.any.isRequired,
   multiSelect: PropTypes.bool,
   currentSelection: PropTypes.any,
   onSelectionChange: PropTypes.func.isRequired,

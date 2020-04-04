@@ -8,11 +8,10 @@ import SpecialButtonGroup from '../Buttons/SpecialButtonGroup';
 
 const DatePicker = ({ fastSelection, selectedDate, onChange }) => {
   const compareFastSelection = (date) => {
-    console.log('piiiiiep');
     const selDateInCompareSelection = fastSelection
       .map((el) => el.date)
       .findIndex((mydate) => mydate.getTime() === date.getTime());
-    let returnSet = new Set();
+    const returnSet = new Set();
     if (selDateInCompareSelection !== -1) {
       returnSet.add(selDateInCompareSelection);
     }
@@ -23,11 +22,10 @@ const DatePicker = ({ fastSelection, selectedDate, onChange }) => {
 
   const handleDateChange = (date) => {
     onChange(date);
-    setCurrentSelection(compareFastSelection(date))
+    setCurrentSelection(compareFastSelection(date));
   };
 
   const handleButtonClick = (selection) => {
-    // setCurrentSelection(selection);
     handleDateChange(fastSelection[Array.from(selection).pop()].date);
   };
 
@@ -53,8 +51,9 @@ const DatePicker = ({ fastSelection, selectedDate, onChange }) => {
 };
 
 DatePicker.propTypes = {
-  fastSelection: PropTypes.arrayOf.isRequired,
-  selectedDate: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  fastSelection: PropTypes.PropTypes.any.isRequired,
+  selectedDate: PropTypes.instanceOf(Date).isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
