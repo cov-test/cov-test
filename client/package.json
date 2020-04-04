@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel ./index.html --log-level 5 --open",
+    "dev": "parcel ./index.html",
     "build": "parcel build ./index.html",
     "test": "jest",
     "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src test"

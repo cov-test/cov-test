@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { hot } from 'react-hot-loader';
 import { Typography } from '@material-ui/core';
 
 import RadioGroup from '../RadioGroup';
 import CountrySelect from '../CountrySelect';
 
-const Step6 = () => {
+const Step6 = ({ onChange }) => {
   const [travelled, setTravelled] = useState();
   const [countries, setCountries] = useState();
+
+  useEffect(() => {
+    if (travelled) {
+      onChange('step6', {
+        travelled: travelled,
+        countries: countries || [],
+      });
+    }
+  });
 
   const onTravelledChangeListener = (chng) => {
     setTravelled(chng);

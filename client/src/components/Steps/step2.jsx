@@ -1,10 +1,12 @@
 import { hot } from 'react-hot-loader';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import Typography from '@material-ui/core/Typography';
 import Hint from '../Hint';
 import RadioGroup from '../RadioGroup';
 import DatePicker from '../DatePicker';
+
 class Step2 extends Component {
   constructor(props) {
     super(props);
@@ -67,7 +69,8 @@ class Step2 extends Component {
     };
 
     const handleChange = (value) => {
-      this.setState({
+      const { onChange } = this.props;
+      onChange('step2', {
         sameHousehold: value,
       });
     };

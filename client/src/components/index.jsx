@@ -14,3 +14,5 @@ export { default as Step2 } from './Steps/step2';
 export { default as Step3 } from './Steps/step3';
 export { default as Step4 } from './Steps/step4';
 export { default as Step6 } from './Steps/step6';
+export { default as Step7 } from './Steps/step7';
+export { default as Step8 } from './Steps/step8';

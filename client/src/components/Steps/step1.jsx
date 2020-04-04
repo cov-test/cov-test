@@ -8,7 +8,7 @@ import Hint from '../Hint';
 
 const Step1 = ({ onChange }) => {
   const onContactInfectedChangeListener = (value) => {
-    onChange({
+    onChange('step1', {
       contactInfected: value,
     });
   };

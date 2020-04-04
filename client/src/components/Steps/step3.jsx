@@ -64,6 +64,7 @@ const Step3 = ({ onChange }) => {
         text={`Nach der eigentlichen Ansteckung mit Corona kann es noch bis zu 14 Tage dauern, bis Symptome auftreten.`}
       />
       <SpecialButtonGroup
+        multiSelect
         buttons={symptomsButtons.map((item) => item.label)}
         currentSelection={new Set()}
         onSelectionChange={onSymptonsChangeListener}
