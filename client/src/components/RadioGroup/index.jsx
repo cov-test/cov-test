@@ -28,7 +28,8 @@ const MyRadioGroup = ({ identifier, controls, onChange }) => {
 
 RadioGroup.propTypes = {
   identifier: PropTypes.string,
-  controls: PropTypes.arrayOf.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  controls: PropTypes.any,
   onChange: PropTypes.func.isRequired,
 };
 

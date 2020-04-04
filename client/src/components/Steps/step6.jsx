@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader';
 import { Typography } from '@material-ui/core';
 
 import RadioGroup from '../RadioGroup';
-import { CountrySelect } from '../';
+import CountrySelect from '../CountrySelect';
 
 const Step6 = () => {
   const [travelled, setTravelled] = useState();
@@ -17,7 +17,7 @@ const Step6 = () => {
     setCountries(sel);
   };
 
-  let mycontrols = [
+  const mycontrols = [
     {
       value: 'no',
       label: 'Nein',
@@ -31,7 +31,6 @@ const Step6 = () => {
       label: 'Ja, und zwar nach',
     },
   ];
-  console.log('hi');
   return (
     <>
       <Typography variant="body2" color="primary">

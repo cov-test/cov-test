@@ -1,9 +1,9 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
-import { Step1, HandleActionButton, Header } from '../../components';
+import { Step1, HandleActionButton, Header, Step2, Step3 } from '../../components';
 
 export const Question = () => {
   const useStyles = makeStyles({
@@ -17,7 +17,6 @@ export const Question = () => {
     },
   });
   const classes = useStyles();
-  const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -27,6 +26,10 @@ export const Question = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
+  const handleChange = (value) => {
+    //set current answer in the stroe
+  };
   return (
     <>
       <Header />
@@ -34,11 +37,12 @@ export const Question = () => {
         <MobileStepper variant="dots" steps={6} position="static" activeStep={activeStep} className={classes.stepper} />
         {
           {
-            0: <Step1 />,
-            1: <Step1 />,
+            0: <Step1 onChange={handleChange} />,
+            1: <Step2 />,
+            2: <Step3 onChange={handleChange} />,
           }[activeStep]
         }
-        <div>
+        <div className={classes.root}>
           <HandleActionButton endIcon={false} title="" onButtonClick={handleBack} />{' '}
           <HandleActionButton endIcon={true} title="weiter" onButtonClick={handleNext} />
         </div>
