@@ -7,7 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
 import { styled } from '@material-ui/core';
-import { Hint } from '..';
+import Hint from '../Hint';
 
 const Headline = styled(Typography)({
   fontFamily: 'Lato',
