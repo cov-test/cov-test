@@ -26,7 +26,7 @@ const Hustenview = () => {
   const MyRadio = ({ options, id, question, info }) => {
     const renderedoptions = options.map((opt, idx) => <FormControlLabel value={idx} control={<Radio />} label={opt} />);
     const handleChange = (event) => {
-      setVals({ [event.target.name]: parseInt(event.target.value, 10) });
+      setVals({ ...allVals, [event.target.name]: parseInt(event.target.value, 10) });
     };
     return (
       <FormControl component="fieldset">
@@ -42,7 +42,12 @@ const Hustenview = () => {
     let result = await classify();
     const map = [3, 0, 1]; //map the classify outputs to the radio options
     result = map[result];
-    setVals({"husten.hustentyp":result});
+    const av2 = allVals;
+    av2['husten.hustentyp'] = result;
+    //    alert(JSON.stringify(av2));
+    setVals({ ...allVals, 'husten.hustentyp': result });
+    setVals(av2); //it shouldn't be needed, but it is...
+    //    alert(JSON.stringify(allVals));
   };
   return (
     <>
