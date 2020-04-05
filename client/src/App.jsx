@@ -16,10 +16,10 @@ const App = () => (
     <AppContainer maxWidth="sm" className="app">
       <ThemeProvider theme={theme}>
         <Router primary={false}>
-          <Home path="/" />
+          <Home path="/" default />
           <Questionnary path="/start" />
           <Question path="/question" />
-          <Hustenview path="/husten" default />
+          <Hustenview path="/husten" />
         </Router>
       </ThemeProvider>
     </AppContainer>

@@ -7,7 +7,7 @@ import * as tfjs from '@tensorflow/tfjs';
 const URL = 'https://www.brainsignals.de/cough-test/my_model/'; //TODO put here the URL that depends on the deployment
 //const URL = 'file://../../../assets/model/'; //TODO put here the URL that depends on the deployment
 //const URL="file:///work/corona/git/cov-test/ml/my_model/"
-const detectiondbg = 1; //if 1 then it shows the accumulating scores
+const detectiondbg = 0; //if 1 then it shows the accumulating scores
 const thr1 = 0.7;
 const nrseconds = 16;
 const maxframes = 7;
@@ -42,8 +42,15 @@ function sleep(ms) {
 }
 
 async function classify() {
+  const recordingbtn = document.getElementById('recordingbtn');
+  const origtext = recordingbtn.textContent;
+
   await init();
   await sleep(100);
+
+  recordingbtn.textContent = origtext;
+  //put the style back, can be done with css as well
+  recordingbtn.style.backgroundColor = '#ffffff';
 
   //decision logic
   let mx = Math.max(allscores[0], allscores[1]);
@@ -58,6 +65,7 @@ async function init() {
   const classLabels = recognizer.wordLabels(); // get class labels
   const labelContainer = document.getElementById('label-container');
   const recordingbtn = document.getElementById('recordingbtn');
+
   if (detectiondbg) {
     for (let i = 0; i < classLabels.length; i++) {
       labelContainer.appendChild(document.createElement('div'));
@@ -101,9 +109,6 @@ async function init() {
       if (frames > maxframes) {
         recognizer.stopListening();
         clearInterval(tobj);
-        //put the style back, can be done with css as well
-        recordingbtn.style.backgroundColor = '#ffffff';
-        recordingbtn.textContent = 'Start';
         resolve(allscores);
       }
     }, 1000);

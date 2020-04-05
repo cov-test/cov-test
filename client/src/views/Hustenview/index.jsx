@@ -17,52 +17,57 @@ const Title = () => (
   </Typography>
 );
 
-const MyRadio = ({ options, id, question, preselected, info }) => {
-  const renderedoptions = options.map((opt, idx) => <FormControlLabel value={idx} control={<Radio />} label={opt} />);
-  const [value, setValue] = React.useState(preselected);
-  const handleChange = (event) => {
-    setValue(parseInt(event.target.value));
+const Hustenview = () => {
+  const [allVals, setVals] = React.useState({
+    'husten.hustentyp': 3,
+    'husten.auswurf': 1,
+    'husten.blut': 1,
+  });
+  const MyRadio = ({ options, id, question, info }) => {
+    const renderedoptions = options.map((opt, idx) => <FormControlLabel value={idx} control={<Radio />} label={opt} />);
+    const handleChange = (event) => {
+      setVals({ [event.target.name]: parseInt(event.target.value, 10) });
+    };
+    return (
+      <FormControl component="fieldset">
+        <FormLabel component="legend">{question}</FormLabel>
+        {info != undefined ? <Hint text={info} /> : <span />}
+        <RadioGroup name={id} value={allVals[id]} onChange={handleChange}>
+          {renderedoptions}
+        </RadioGroup>
+      </FormControl>
+    );
+  };
+  const recordAndClassif = async function () {
+    let result = await classify();
+    const map = [3, 0, 1]; //map the classify outputs to the radio options
+    result = map[result];
+    setVals({"husten.hustentyp":result});
   };
   return (
-    <FormControl component="fieldset">
-      <FormLabel component="legend">{question}</FormLabel>
-      {info != undefined ? <Hint text={info} /> : <span />}
-      <RadioGroup name={id} value={value} onChange={handleChange}>
-        {renderedoptions}
-      </RadioGroup>
-    </FormControl>
+    <>
+      <Header />
+      <div className="home">
+        <Title />
+        <div id="label-container" />
+        <MyRadio
+          id="husten.hustentyp"
+          question="Dein Husten ist eher..."
+          options={['Trocken', 'Feucht', 'Ich weiss nicht', 'Kein Husten']}
+        />
+        <button id="recordingbtn" type="button" onClick={recordAndClassif}>
+          Klassifiziere meinen Husten!
+        </button>
+        <MyRadio
+          id="husten.auswurf"
+          info="Auswurf sind die (manchmal gelben) ausgehusteten Absonderungen der Atemswegschleimhäute"
+          question="Hast Du Auswurf?"
+          options={['Ja', 'Nein']}
+        />
+        <MyRadio id="husten.blut" question="Hustet Du Blut?" options={['Ja', 'Nein']} />
+      </div>
+    </>
   );
 };
-
-const recordAndClassif = async function () {
-  alert(await classify());
-};
-
-const Hustenview = () => (
-  <>
-    <Header />
-    <div className="home">
-      <Title />
-      <div id="label-container" />
-      <MyRadio
-        id="husten.hustentyp"
-        question="Dein Husten ist eher..."
-        options={['Trocken', 'Feucht', 'Ich weiss nicht', 'Kein Husten']}
-        preselected={3}
-      />
-      <button id="recordingbtn" type="button" onClick={recordAndClassif}>
-        Klassifiziere meinen Husten!
-      </button>
-      <MyRadio
-        id="husten.auswurf"
-        info="Auswurf sind die (manchmal gelben) ausgehusteten Absonderungen der Atemswegschleimhäute"
-        question="Hast Du Auswurf?"
-        options={['Ja', 'Nein']}
-        preselected={1}
-      />
-      <MyRadio id="husten.blut" question="Hustet Du Blut?" options={['Ja', 'Nein']} preselected={1} />
-    </div>
-  </>
-);
 
 export default hot(module)(Hustenview);
