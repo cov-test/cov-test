@@ -1,35 +1,48 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
 import { hot } from 'react-hot-loader';
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@material-ui/core';
 
 import SpecialButton from '../Special';
 
-const SpecialButtonGroup = ({ buttons, multiSelect, currentSelection, onSelectionChange }) => {
-  const handleButtonClick = (id) => {
+class SpecialButtonGroup extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentSelection: props.currentSelection || new Set(),
+    };
+  }
+  handleButtonClick = (id) => {
+    const { multiSelect, currentSelection, onSelectionChange } = this.props;
     if (!multiSelect) {
       onSelectionChange(new Set([id]));
     } else {
       onSelectionChange(currentSelection.add(id));
     }
   };
-  return (
-    <Box display="flex" flexDirection="row" flexWrap="wrap">
-      {buttons.map((button, index) => (
-        <SpecialButton
-          key={index}
-          title={button}
-          onButtonClick={() => {
-            handleButtonClick(index);
-          }}
-          selected={currentSelection ? currentSelection.has(index) : false}
-        />
-      ))}
-    </Box>
-  );
-};
+
+  render() {
+    const { buttons, multiSelect, currentSelection, onSelectionChange } = this.props;
+
+    return (
+      <Box display="flex" flexDirection="row" flexWrap="wrap">
+        {buttons.map((button, index) => (
+          <SpecialButton
+            key={index}
+            title={button}
+            onButtonClick={() => {
+              handleButtonClick(index);
+            }}
+            selected={currentSelection ? currentSelection.has(index) : false}
+          />
+        ))}
+      </Box>
+    );
+  }
+}
 
 SpecialButtonGroup.propTypes = {
   buttons: PropTypes.any.isRequired,
@@ -40,6 +53,7 @@ SpecialButtonGroup.propTypes = {
 
 SpecialButtonGroup.defaultProps = {
   multiSelect: false,
+  currentSelection: new Set(),
 };
 
 export default hot(module)(SpecialButtonGroup);

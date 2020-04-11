@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { addAnswer } from '../../store/actions/question';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
+
+import { addAnswer } from '../../store/actions/question';
 
 import { Step1, HandleActionButton, Header, Step2, Step3, Step4, Step6, Step7, Step8 } from '../../components';
 
