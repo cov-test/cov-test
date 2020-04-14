@@ -8,7 +8,7 @@ import Hint from '../Hint';
 
 const Step3 = ({ onChange }) => {
   const onSymptonsChangeListener = (value) => {
-    onChange({
+    onChange('step3', {
       symptoms: value,
     });
   };

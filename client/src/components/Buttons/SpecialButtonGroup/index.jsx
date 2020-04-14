@@ -15,12 +15,43 @@ class SpecialButtonGroup extends Component {
       currentSelection: props.currentSelection || new Set(),
     };
   }
+
+  usingCurrentSelectionProps = () => (this.props.currentSelection !== undefined ? true : false);
+
   handleButtonClick = (id) => {
     const { multiSelect, currentSelection, onSelectionChange } = this.props;
     if (!multiSelect) {
-      onSelectionChange(new Set([id]));
+      if (this.usingCurrentSelectionProps()) {
+        onSelectionChange(new Set([id]));
+      } else {
+        this.setState({
+          currentSelection: new Set([id]),
+        });
+      }
     } else {
-      onSelectionChange(currentSelection.add(id));
+      if (this.usingCurrentSelectionProps()) {
+        if (!currentSelection.has(id)) {
+          onSelectionChange(currentSelection.add(id));
+        } else {
+          const newSelection = new Set(currentSelection);
+          newSelection.delete(id);
+          onSelectionChange(newSelection);
+        }
+      } else {
+        if (currentSelection.has(id)) {
+          this.setState(({ currentSelection }) => ({
+            currentSelection: new Set(currentSelection).add(id),
+          }));
+        } else {
+          this.setState(({ currentSelection }) => {
+            const newSelection = new Set(currentSelection);
+            newSelection.delete(id);
+            return {
+              currentSelection: newSelection,
+            };
+          });
+        }
+      }
     }
   };
 
@@ -34,7 +65,7 @@ class SpecialButtonGroup extends Component {
             key={index}
             title={button}
             onButtonClick={() => {
-              handleButtonClick(index);
+              this.handleButtonClick(index);
             }}
             selected={currentSelection ? currentSelection.has(index) : false}
           />
@@ -53,7 +84,6 @@ SpecialButtonGroup.propTypes = {
 
 SpecialButtonGroup.defaultProps = {
   multiSelect: false,
-  currentSelection: new Set(),
 };
 
 export default hot(module)(SpecialButtonGroup);

@@ -46,7 +46,7 @@ export const Question = (props) => {
           {
             0: <Step1 onChange={handleStepDataChange} />,
             1: <Step2 onChange={handleStepDataChange} />,
-            2: <Step3 onChange={(sel) => console.log(sel)} />,
+            2: <Step3 onChange={handleStepDataChange} />,
             3: <Step4 onChange={handleStepDataChange} />,
             4: <Step4 />,
             5: <Step6 onChange={handleStepDataChange} />,
