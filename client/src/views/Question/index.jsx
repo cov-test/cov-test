@@ -14,6 +14,7 @@ export const Question = (props) => {
   const useStyles = makeStyles({
     stepper: {
       flexGrow: 1,
+      background: '#f4f2f7',
     },
     root: {
       margin: '15px',

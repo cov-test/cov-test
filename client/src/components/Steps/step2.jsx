@@ -22,7 +22,7 @@ class Step2 extends Component {
     const { onChange } = this.props;
 
     if (nextState.selectedDate != selectedDate || nextState.sameHousehold != sameHousehold) {
-      onChange({
+      onChange('step2', {
         daysSinceContact: selectedDate,
         sameHousehold: sameHousehold,
       });
@@ -32,6 +32,12 @@ class Step2 extends Component {
   handleDatepickerUpdate = (date) => {
     this.setState({
       selectedDate: date,
+    });
+  };
+
+  handleChange = (value) => {
+    this.setState({
+      sameHousehold: value,
     });
   };
 
@@ -67,13 +73,6 @@ class Step2 extends Component {
       selectedDate: this.state.selectedDate,
       onChange: this.handleDatepickerUpdate,
     };
-
-    const handleChange = (value) => {
-      const { onChange } = this.props;
-      onChange('step2', {
-        sameHousehold: value,
-      });
-    };
     return (
       <>
         <Typography variant="body2" color="primary">
@@ -82,7 +81,7 @@ class Step2 extends Component {
         <Hint
           text={`Als Kontakt gilt \n•  jemanden für mehr als 15min treffen \n•  physischer Kontakt wie Hände schütteln oder küssen`}
         />
-        <RadioGroup identifier="sameHousehold" onChange={handleChange} controls={mycontrols} />
+        <RadioGroup identifier="sameHousehold" onChange={this.handleChange} controls={mycontrols} />
 
         <DatePicker {...datepickerProps} />
       </>

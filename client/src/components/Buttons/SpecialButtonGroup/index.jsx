@@ -56,7 +56,7 @@ class SpecialButtonGroup extends Component {
   };
 
   render() {
-    const { buttons, multiSelect, currentSelection, onSelectionChange } = this.props;
+    const { buttons, currentSelection } = this.props;
 
     return (
       <Box display="flex" flexDirection="row" flexWrap="wrap">

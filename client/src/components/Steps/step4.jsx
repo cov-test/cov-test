@@ -27,11 +27,9 @@ class Step4 extends Component {
     const { onChange } = this.props;
 
     if (nextState.selectedDate != selectedDate || nextState.fever != fever) {
-      onChange({
-        FEVER: {
-          maximumTemperatureInDegrees: fever,
-          daysSinceMaximumTemperature: selectedDate,
-        },
+      onChange('step4', {
+        maximumTemperatureInDegrees: fever,
+        daysSinceMaximumTemperature: selectedDate,
       });
     }
   }
