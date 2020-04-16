@@ -52,7 +52,7 @@ export const Question = (props) => {
             4: <Step4 />,
             5: <Step6 onChange={handleStepDataChange} />,
             6: <Step7 onChange={handleStepDataChange} />,
-            7: <Step8 />,
+            7: <Step8 onChange={handleStepDataChange} />,
           }[activeStep]
         }
         <div className={classes.root}>

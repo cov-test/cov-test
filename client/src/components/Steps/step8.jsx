@@ -5,21 +5,48 @@ import { Typography } from '@material-ui/core';
 
 import Hint from '../Hint';
 import RadioGroup from '../RadioGroup';
-import SpecialButtonGroup from '../Buttons/SpecialButtonGroup';
-
-const buttons = [
-  'Raucher',
-  'Schwanger',
-  'Chronische Lungenerkrankung',
-  'Einnahme von Immunsuppressiva',
-  'Diabetes',
-  'Nierenleiden',
-  'Herz-Kreislauf-Erkrankungen',
-  'Asthma',
-  'Über 50 Jahre alt',
-];
+import SpecialButtonGroupValues from '../Buttons/SpecialButtonGroupValues';
 
 const Step8 = ({ onChange }) => {
+  const onRiskGroupChangeListener = (value) => {
+    onChange('step8', {
+      riskGroup: value,
+    });
+  };
+  const riskGroupButtons = [
+    {
+      value: 'smoker',
+      label: 'Raucher',
+    },
+    {
+      value: 'pregnant',
+      label: 'Schwanger',
+    },
+    {
+      value: 'chronicLungDisease',
+      label: 'Chronische Lungenerkrankung',
+    },
+    {
+      value: 'consumptionOfImmunoSuppressantDrugs',
+      label: 'Einnahme von Immunsuppressiva',
+    },
+    {
+      value: 'diabetes',
+      label: 'Diabetes',
+    },
+    {
+      value: 'kidneyDisease',
+      label: 'Nierenleiden',
+    },
+    {
+      value: 'cardiovascularDisease',
+      label: 'Herz-Kreislauf-Erkrankungen',
+    },
+    {
+      value: 'overFiftyYearsYold',
+      label: 'Über 50 Jahre alt',
+    },
+  ];
   return (
     <>
       <Typography variant="body2" color="primary">
@@ -28,7 +55,7 @@ const Step8 = ({ onChange }) => {
       <Hint
         text={`Einige Menschen haben ein höheres Risiko\n an der Lungenkrankheit COVID-19 zu\n erkranken. Wir müssen diese Personen\n besonders schützen.`}
       />
-      <SpecialButtonGroup multiSelect buttons={buttons} />
+      <SpecialButtonGroupValues multiSelect buttons={riskGroupButtons} onSelectionChange={onRiskGroupChangeListener} />
     </>
   );
 };
