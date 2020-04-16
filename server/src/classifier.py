@@ -19,7 +19,9 @@ def flatten_answers(answers):
 
 
 HIGH_RISK_COUNTRIES = set([
-    'CN', # CHINA
+    'CN', # China
+    'ES', # Spain
+    'IT', # Italy
 ])
 
 prob_to_odds = lambda p: 1 + p / (1 - p)
@@ -59,11 +61,11 @@ coefficients = collections.OrderedDict({
     'contactToInfectedPerson__daysSinceContact': 0.0,
     'contactToInfectedPerson__sameHousehold':    np.log(100),
     
-    "riskGroup__overFiftyYearsOld":               np.log(1.1),
+    "riskGroup__overFiftyYearsOld":               np.log(1.05),
     "riskGroup__overSixtyYearsOld":               np.log(1.1),
-    "riskGroup__overSeventyYearsOld":             np.log(1.3),
-    "riskGroup__overEightyYearsOld":              np.log(1.4),
-    "riskGroup__smoker":                          np.log(1.2),
+    "riskGroup__overSeventyYearsOld":             np.log(1.15),
+    "riskGroup__overEightyYearsOld":              np.log(1.3),
+    "riskGroup__smoker":                          np.log(1.1),
     "riskGroup__pregnant":                        np.log(1.3),
     "riskGroup__chronicLungDisease":              np.log(1.3),
     "riskGroup__consumptionOfImmunoSuppressantDrugs": np.log(1.3),
@@ -415,7 +417,7 @@ def test_classify():
     res = classify(answers)
     print(res)
 
-    assert res[0] == True
+    assert res[0] == False
 
 
 def test_data_from_backend():

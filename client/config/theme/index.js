@@ -7,11 +7,20 @@ const theme = createMuiTheme({
     },
   },
   typography: {
+    fontFamily: 'Lato, sans-serif',
     body1: {
       fontSize: 12,
       fontFamily: 'Lato',
       lineHeight: 1.33,
       fontWeight: 'normal',
+      fontStretch: 'normal',
+      fontStyle: 'normal',
+      letterSpacing: 'normal',
+    },
+    body2: {
+      fontSize: 16,
+      lineHeight: 1.5,
+      fontWeight: 'bold',
       fontStretch: 'normal',
       fontStyle: 'normal',
       letterSpacing: 'normal',
