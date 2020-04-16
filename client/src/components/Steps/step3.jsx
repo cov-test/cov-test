@@ -3,7 +3,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 
-import SpecialButtonGroup from '../Buttons/SpecialButtonGroup';
+import SpecialButtonGroupValues from '../Buttons/SpecialButtonGroupValues';
 import Hint from '../Hint';
 
 const Step3 = ({ onChange }) => {
@@ -63,12 +63,7 @@ const Step3 = ({ onChange }) => {
       <Hint
         text={`Nach der eigentlichen Ansteckung mit Corona kann es noch bis zu 14 Tage dauern, bis Symptome auftreten.`}
       />
-      <SpecialButtonGroup
-        multiSelect
-        buttons={symptomsButtons.map((item) => item.label)}
-        currentSelection={new Set()}
-        onSelectionChange={onSymptonsChangeListener}
-      />
+      <SpecialButtonGroupValues multiSelect buttons={symptomsButtons} onSelectionChange={onSymptonsChangeListener} />
     </>
   );
 };
