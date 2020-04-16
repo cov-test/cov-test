@@ -16,21 +16,39 @@ class SpecialButtonGroupValues extends Component {
     };
   }
 
-  handleButtonClick = (id, value) => {
-    // onSelectionChange
-    const { onSelectionChange } = this.props;
+  componentDidUpdate(nextProps, nextState) {
     const { currentSelection } = this.state;
-    this.setState({
-      currentSelection: [...currentSelection, { index: id, value: value }],
-    });
-    onSelectionChange(currentSelection);
-  };
+    const { onSelectionChange } = this.props;
+    if (nextState.currentSelection != currentSelection) {
+      onSelectionChange(currentSelection);
+    }
+  }
 
   checkIsSelected = (index) => {
     const { currentSelection } = this.state;
     return currentSelection.find((obj) => {
       return obj.index === index;
     });
+  };
+
+  handleButtonClick = (id, value) => {
+    const { currentSelection } = this.state;
+    if (currentSelection.length > 0) {
+      if (!this.checkIsSelected(id)) {
+        console.log('is not selected');
+        this.setState({
+          currentSelection: [...currentSelection, { index: id, value: value }],
+        });
+      } else {
+        this.setState({
+          currentSelection: currentSelection.filter((sel) => sel.index !== id),
+        });
+      }
+    } else {
+      this.setState({
+        currentSelection: [...currentSelection, { index: id, value: value }],
+      });
+    }
   };
 
   render() {
