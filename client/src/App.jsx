@@ -7,10 +7,7 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import theme from '../config/theme';
 
-// import i18n (needs to be bundled ;))
-import './i18n';
-
-import { Home, Questionnary, Question } from './views';
+import { Home, Questionnary, Question, Hustenview } from './views';
 import './App.css';
 
 const AppContainer = styled(Container)({
@@ -25,20 +22,18 @@ const GlobalCss = withStyles({
   },
 })(() => null);
 const App = () => (
-  <Provider store={store}>
-    <Suspense fallback="loading">
-      <GlobalCss />
-      <AppContainer maxWidth="sm" className="app">
-        <ThemeProvider theme={theme}>
-          <Router primary={false}>
-            <Home path="/" default />
-            <Questionnary path="/start" />
-            <Question path="/question" />
-          </Router>
-        </ThemeProvider>
-      </AppContainer>
-    </Suspense>
-  </Provider>
+  <>
+    <AppContainer maxWidth="sm" className="app">
+      <ThemeProvider theme={theme}>
+        <Router primary={false}>
+          <Home path="/" default />
+          <Questionnary path="/start" />
+          <Question path="/question" />
+          <Hustenview path="/husten" />
+        </Router>
+      </ThemeProvider>
+    </AppContainer>
+  </>
 );
 
 export default hot(module)(App);
