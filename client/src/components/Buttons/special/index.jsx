@@ -32,9 +32,11 @@ const SpecialButton = (props) => {
 };
 
 SpecialButton.propTypes = {
-  selected: PropTypes.bool.isRequired,
+  selected: PropTypes.bool,
   title: PropTypes.string.isRequired,
   onButtonClick: PropTypes.func.isRequired,
 };
+
+SpecialButton.defaultProps = { selected: false };
 
 export default hot(module)(SpecialButton);
